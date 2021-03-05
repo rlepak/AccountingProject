@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -29,7 +31,7 @@ public class Product extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private InvoiceProduct invoiceProduct;
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
+    private Set<InvoiceProduct> invoiceProducts = new HashSet<>();
 
 }

@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -26,8 +28,8 @@ public class SPTable extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 
-    @OneToOne(mappedBy = "spTable")
-    private Invoice invoice;
+    @OneToMany(mappedBy = "spTable",fetch = FetchType.LAZY)
+    private Set<Invoice> invoices = new HashSet<>();
 
 
 }

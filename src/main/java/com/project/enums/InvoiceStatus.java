@@ -1,5 +1,5 @@
 package com.project.enums;
 
-public enum Status {
+public enum InvoiceStatus {
     ACTIVE, CLOSED
 }

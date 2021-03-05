@@ -22,7 +22,7 @@ public class Invoice extends BaseEntity {
     private String invoiceType;
     private LocalDate invoiceDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private SPTable spTable;
 
     @ManyToOne(fetch = FetchType.LAZY)
