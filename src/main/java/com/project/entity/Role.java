@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +17,7 @@ public class Role{
 
         @Id
         int id;
-        private String name;
+        private String description;
         private boolean enabled;
 
         @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)

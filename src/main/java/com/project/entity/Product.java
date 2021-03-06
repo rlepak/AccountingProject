@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.project.enums.Unit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +21,9 @@ public class Product extends BaseEntity{
     private String description;
     private int quantity;
     private double price;
-    private String unit;
+
+    @Enumerated(EnumType.STRING)
+    private Unit unit;
     private double lowLimitAlert;
     private double tax;
     private boolean enabled;

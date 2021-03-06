@@ -13,40 +13,27 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @MappedSuperclass
+@EntityListeners(BaseEntityListener.class)
 public class BaseEntity {
 
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-//    @Column(nullable = false, updatable = false)
-//    private int createdBy;
-//
-//    @Column(nullable = false, updatable = false)
-//    private LocalDateTime createdTime;
-//
-//    @Column(nullable = false)
-//    private int updatedBy;
-//
-//    private LocalDateTime updatedTime;
-//
-//    private Boolean isDeleted = false;
+    @Column(nullable = false, updatable = false)
+    public int createdBy;
 
-//    @PrePersist
-//    private void onPrePersist() {
-//        this.createdTime = LocalDateTime.now();
-//        this.updatedTime = LocalDateTime.now();
-//        //TODO add user id
-//        this.createdBy = 1;
-//        this.updatedBy = 1;
-//    }
-//
-//    @PreUpdate
-//    private void onPreUpdate() {
-//        //TODO add user id
-//        this.updatedTime = LocalDateTime.now();
-//        this.updatedBy = 1;
-//    }
+    @Column(nullable = false, updatable = false)
+    public LocalDateTime createdTime;
+
+    @Column(nullable = false)
+    public int updatedBy;
+
+    public LocalDateTime updatedTime;
+
+    public Boolean isDeleted = false;
+
+
 
 
 }
