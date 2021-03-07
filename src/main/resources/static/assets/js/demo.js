@@ -238,6 +238,36 @@ demo = {
 
         Chartist.Line('#chartTotalEarnings', dataPrice, optionsPrice);
 
+        /*  **************** Chart Total Sales - single line ******************** */
+
+        var dataPrice = {
+            labels: ['Jan','Feb','Mar', 'April', 'May', 'June'],
+            series: [
+                [230, 340, 400, 300, 570, 500, 800]
+            ]
+        };
+
+        var optionsPrice = {
+            showPoint: false,
+            lineSmooth: true,
+            height: "210px",
+            axisX: {
+                showGrid: false,
+                showLabel: true
+            },
+            axisY: {
+                offset: 40,
+                showGrid: false
+            },
+            low: 0,
+            high: 'auto',
+            classNames: {
+                line: 'ct-line ct-green'
+            }
+        };
+
+        Chartist.Line('#chartTotalSales', dataPrice, optionsPrice);
+
         /*  **************** Chart Subscriptions - single line ******************** */
 
         var dataDays = {

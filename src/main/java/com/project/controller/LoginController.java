@@ -8,6 +8,11 @@ public class LoginController {
 
     @RequestMapping(value = {"/", "/login"})
     public String login(){
-        return "landingPage";
+        return "login";
+    }
+
+    @RequestMapping("/index")
+    public String welcome(){
+        return "index";
     }
 }

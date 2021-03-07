@@ -9,10 +9,6 @@
             Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
         -->
         <div class="logo">
-            <!--            <a href="https://www.creative-tim.com" class="simple-text logo-mini">-->
-
-            <!--            </a>-->
-
             <a href="#" class="simple-text logo-normal text-center">
                 Premier Accounting
                 <i class="fa-hand-holding-usd"></i>
@@ -21,14 +17,14 @@
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="../assets/img/faces/face-2.jpg" />
+                    <img src="../assets/img/faces/face-2.jpg"/>
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
 	                        <span>
-								Chet Faker,
+								Ruslan Lepak,
                                 <br>
-                                Manager
+                                Root User
 		                        <b class="caret"></b>
 							</span>
                     </a>
@@ -60,33 +56,121 @@
             </div>
             <ul class="nav">
                 <li>
-                    <a data-toggle="collapse" href="#dashboardOverview">
+                    <a href="/index">
+                        <i class="ti-home"></i>
+                        <p>Home Page</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="collapse" href="#management">
                         <i class="ti-panel"></i>
-                        <p>Collapse
+                        <p>Management
                             <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse" id="dashboardOverview">
+                    <div class="collapse" id="management">
                         <ul class="nav">
                             <li>
-                                <a href="#panda">
-                                    <span class="sidebar-mini">C1</span>
-                                    <span class="sidebar-normal">Collapse 1</span>
+                                <a th:href="@{/company/registration}">
+                                    <i class="ti-angle-right"></i>
+                                    <span class="sidebar-normal">Company Registration</span>
                                 </a>
                             </li>
                             <li>
-                                <span class="sidebar-mini">C2</span>
-                                <span class="sidebar-normal">Collapse 2</span>
+                                <a href="#">
+                                    <i class="ti-angle-right"></i>
+                                    <span class="sidebar-normal">User Registration</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-angle-right"></i>
+                                    <span class="sidebar-normal">Vendor/Client Registration</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#stockManagement">
+                        <i class="ti-stats-up"></i>
+                        <p>Stock Management
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="stockManagement">
+                        <ul class="nav">
+                            <li>
+                                <a href="#">
+                                    <i class="ti-angle-right"></i>
+                                    <span class="sidebar-normal">Products</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-angle-right"></i>
+                                    <span class="sidebar-normal">Category</span>
+                                </a>
                             </li>
                         </ul>
                     </div>
                 </li>
-
                 <li>
-                    <a href="calendar.html">
-                        <i class="ti-calendar"></i>
-                        <p>Simple Link</p>
+                    <a data-toggle="collapse" href="#invoices">
+                        <i class="ti-file"></i>
+                        <p>Invoices
+                            <b class="caret"></b>
+                        </p>
                     </a>
+                    <div class="collapse" id="invoices">
+                        <ul class="nav">
+                            <li>
+                                <a href="#">
+                                    <i class="ti-angle-right"></i>
+                                    <span class="sidebar-normal">Purchase Invoice</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-angle-right"></i>
+                                    <span class="sidebar-normal">Sales Invoice</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-angle-right"></i>
+                                    <span class="sidebar-normal">Invoice Search</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#reporting">
+                        <i class="fa fa-houzz" aria-hidden="true"></i>
+                        <p>Reporting
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="reporting">
+                        <ul class="nav">
+                            <li>
+                                <a href="#">
+                                    <i class="ti-angle-right"></i>
+                                    <span class="sidebar-normal">Stock Report</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-angle-right"></i>
+                                    <span class="sidebar-normal">Profit / Loss Report</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
 
             </ul>
