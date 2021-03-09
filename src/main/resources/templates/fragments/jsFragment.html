@@ -13,6 +13,9 @@
     <!--  Forms Validations Plugin -->
     <script src="../assets/js/jquery.validate.min.js"></script>
 
+    <!-- Sliders Plugin -->
+    <script src="../assets/js/nouislider.min.js"></script>
+
     <!-- Promise Library for SweetAlert2 working on IE -->
     <script src="../assets/js/es6-promise-auto.min.js"></script>
 
@@ -26,7 +29,7 @@
     <script src="../assets/js/bootstrap-selectpicker.js"></script>
 
     <!--  Checkbox, Radio, Switch and Tags Input Plugins -->
-    <script src="../../assets/js/bootstrap-switch-tags.js"></script>
+    <script src="../assets/js/bootstrap-switch-tags.js"></script>
 
     <!--  Switch and Tags Input Plugins -->
     <script src="../assets/js/bootstrap-switch-tags.js"></script>
@@ -174,6 +177,22 @@
         });
     </script>
 
+    <script type="text/javascript">
+        $().ready(function(){
+            // Init Sliders
+            demo.initFormExtendedSliders();
+            // Init DatetimePicker
+            demo.initFormExtendedDatetimepickers();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $().ready(function(){
+            $('#registerFormValidation').validate();
+            $('#loginFormValidation').validate();
+            $('#allInputsFormValidation').validate();
+        });
+    </script>
 
 </div>
 </body>

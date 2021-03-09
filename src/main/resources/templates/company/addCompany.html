@@ -23,205 +23,159 @@
                     <!-- Content start here -->
                     <div class="col-md-12">
                         <div class="card">
-
-                            <form id="allInputsFormValidation" class="form-horizontal" action="#" method="#" novalidate="">
+                            <form id="registerFormValidation" action="" method="" novalidate="">
                                 <div class="card-content">
-                                    <h4 class="card-title">Type Validation</h4>
+                                    <a class="btn btn-primary" type="button" th:href="@{/company/registration}"><i
+                                            class="ti-list"> </i> Company List
+                                    </a>
+                                    <br>
+                                    <h4 class="card-title">Add new Company</h4>
                                     <fieldset>
-                                        <div class="form-group column-sizing">
-                                            <label class="col-sm-2 control-label">
-                                                Equal to
-                                            </label>
-                                            <div class="col-sm-3">
-                                                <input class="form-control"
-                                                       id="idSource1"
-                                                       type="text"
-                                                       placeholder="#idSource1"
-                                                />
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <input class="form-control"
-                                                       id="idDestination1"
-                                                       type="text"
-                                                       placeholder="#idDestination1"
-                                                       equalTo="#idSource"
-                                                />
-                                            </div>
-                                            <div class="col-sm-4"><code>equalTo="#idSource"</code>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Title
+                                                        </label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               name="required"
+                                                               required="required"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            State
+                                                        </label>
+                                                        <select name="states" class="form-control" required="required">
+                                                            <option selected="" disabled="">Select State</option>
+                                                            <option value="ms">Bahasa Melayu</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">
-                                                Required Text
-                                            </label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control"
-                                                       type="text"
-                                                       name="required"
-                                                       required="required"
-                                                />
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label>
+                                                        Zip
+                                                    </label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               name="required1"
+                                                               required="required"
+                                                        />
+                                                </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label>
+                                                        Status
+                                                    </label>
+                                                    <br/>
+                                                    <select name="status" class="form-control" required>
+                                                        <option selected="" disabled="">Select Status</option>
+                                                        <option value="ms">Bahasa Melayu</option>
+                                                        <option value="ca">Català</option>
+                                                        <option value="da">Dansk</option>
+                                                        <option value="de">Deutsch</option>
+                                                        <option value="en">English</option>
+                                                        <option value="es">Español</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-4"><code>required</code></div>
+                                            <br>
+                                        </div>
                                         </div>
                                     </fieldset>
-
                                     <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">
-                                                Email
-                                            </label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control"
-                                                       type="text"
-                                                       name="email"
-                                                       email="true"
-                                                />
-                                            </div>
-                                            <div class="col-sm-4"><code>email="true"</code></div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">
-                                                Number
-                                            </label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control"
-                                                       type="text"
-                                                       name="number"
-                                                       number="true"
-                                                />
-                                            </div>
-                                            <div class="col-sm-4"><code>number="true"</code></div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">
-                                                Url
-                                            </label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control"
-                                                       type="text"
-                                                       name="url"
-                                                       url="true"
-                                                />
-                                            </div>
-                                            <div class="col-sm-4"><code>url="true"</code></div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group column-sizing">
-                                            <label class="col-sm-2 control-label">
-                                                Equal to
-                                            </label>
-                                            <div class="col-sm-3">
-                                                <input class="form-control"
-                                                       id="idSource"
-                                                       type="text"
-                                                       placeholder="#idSource"
-                                                />
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <input class="form-control"
-                                                       id="idDestination"
-                                                       type="text"
-                                                       placeholder="#idDestination"
-                                                       equalTo="#idSource"
-                                                />
-                                            </div>
-                                            <div class="col-sm-4"><code>equalTo="#idSource"</code>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <h4 class="card-title">Range validation</h4>
-
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">
-                                                Min Length
-                                            </label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control"
-                                                       type="text"
-                                                       name="min_length"
-                                                       minLength="5"
-                                                />
-                                            </div>
-                                            <div class="col-sm-4"><code>minLength="5"</code></div>
+                                        <div class="col-lg-8">
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>
+                                                            Address
+                                                        </label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               name="required3"
+                                                               required="required"
+                                                        />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>
+                                                            Representative
+                                                        </label>
+                                                        <input type="text" placeholder=".col-md-4"
+                                                               class="form-control" required="required">
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <br>
                                         </div>
                                     </fieldset>
 
                                     <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">
-                                                Max Length
-                                            </label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control"
-                                                       type="text"
-                                                       name="max_length"
-                                                       maxLength="5"
-                                                />
-                                            </div>
-                                            <div class="col-sm-4"><code>maxLength="5"</code></div>
+                                        <div class="col-lg-8">
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>
+                                                            Email
+                                                        </label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               name="required5"
+                                                               required="required"
+                                                               email="true"
+                                                        />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>
+                                                            Phone
+                                                        </label>
+                                                        <input class="form-control"
+                                                                   type="text"
+                                                                   name="required6"
+                                                                   required="required"
+                                                    />
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <br>
                                         </div>
                                     </fieldset>
 
                                     <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Range</label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control"
-                                                       type="text"
-                                                       name="range"
-                                                       range="[6,10]"
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>
+                                                        Establishment Date
+                                                    </label>
+                                                    <input class="form-control"
+                                                               type="date"
+                                                               name="required7"
+                                                               required="required"
                                                 />
+                                                </div>
                                             </div>
-                                            <div class="col-sm-4"><code>range="[6,10]"</code></div>
+                                            <br>
                                         </div>
                                     </fieldset>
 
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">
-                                                Min Value
-                                            </label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control"
-                                                       type="text"
-                                                       name="min"
-                                                       min="6"
-                                                />
-                                            </div>
-                                            <div class="col-sm-4"><code>min="6"</code></div>
-                                        </div>
-                                    </fieldset>
 
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">
-                                                Max Value
-                                            </label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control"
-                                                       type="text"
-                                                       name="max"
-                                                       max="6"
-                                                />
-                                            </div>
-                                            <div class="col-sm-4"><code>max="6"</code></div>
-                                        </div>
-                                    </fieldset>
+                                <div class="card-footer text-right">
+                                    <button type="submit" class="btn btn-success btn-fill">Save Changes</button>
+                                    <a type="button" th:href="@{/company/registration}" class="btn btn-wd">Cancel</a>
                                 </div>
-                                <div class="card-footer text-center">
-                                    <button type="submit" class="btn btn-info btn-fill">Validate Inputs</button>
                                 </div>
                             </form>
                         </div>
@@ -238,5 +192,6 @@
 </div>
 </body>
 <div th:replace="/fragments/jsFragment :: jsFragments"></div>
+
 
 </html>
