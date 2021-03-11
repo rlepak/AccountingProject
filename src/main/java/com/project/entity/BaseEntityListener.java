@@ -13,10 +13,10 @@ public class BaseEntityListener extends AuditingEntityListener {
     @PrePersist
     private void onPrePersist(BaseEntity baseEntity) {
         baseEntity.createdTime = LocalDateTime.now();
-        baseEntity.updatedTime = LocalDateTime.now();
+//        baseEntity.updatedTime = LocalDateTime.now();
         //TODO add user id
         baseEntity.createdBy = 1;
-        baseEntity.updatedBy = 1;
+//        baseEntity.updatedBy = 1;
     }
 
     @PreUpdate

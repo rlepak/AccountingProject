@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,12 +16,17 @@ public class CompanyDto {
 
     private long Id;
     private String title;
+    private String state;
     private String representative;
     private String email;
+    private String address;
     private String phone;
     private String zip;
-    private String state;
     private boolean enabled;
+    private String successfulMessage;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate establishedDate;
 
 
 }

@@ -28,7 +28,9 @@ public class Company extends BaseEntity{
 
     private String representative;
 
+    @Column(unique = true)
     private String email;
+
 
     private LocalDate establishedDate;
 

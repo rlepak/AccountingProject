@@ -3,7 +3,7 @@
 
 <head>
     <div th:replace="/fragments/cssFragment :: cssFragments"></div>
-    <title>Log in - Premier Accounting</title>
+    <title>Add User</title>
 </head>
 
 
@@ -23,39 +23,38 @@
                     <!-- Content start here -->
                     <div class="col-md-12">
                         <div class="card">
-                            <form id="registerFormValidation" th:action="@{/company/addCompany}" method="post"
-                                  th:object="${companyDto}">
+                            <form id="registerFormValidation" action="" method="" novalidate="">
                                 <div class="card-content">
-                                    <a class="btn btn-primary" type="button" th:href="@{/company/registration}"><i
-                                            class="ti-list"> </i> Company List
+                                    <a class="btn btn-primary" type="button" th:href="@{/user/registration}"><i
+                                            class="ti-list"> </i> Users List
                                     </a>
                                     <br>
-                                    <h4 class="card-title">Add new Company</h4>
+                                    <h4 class="card-title">Add new User</h4>
                                     <fieldset>
                                         <div class="col-lg-8">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>
-                                                            Title
+                                                            Firs Name
                                                         </label>
                                                         <input class="form-control"
                                                                type="text"
                                                                name="required"
                                                                required="required"
-                                                                th:field="*{title}"
                                                         />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>
-                                                            State
+                                                            Last Name
                                                         </label>
-                                                        <select name="states" class="form-control" required="required">
-                                                            <option selected="" disabled="">Select State</option>
-                                                            <option value="ms">Bahasa Melayu</option>
-                                                        </select>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               name="required6"
+                                                               required="required"
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -67,27 +66,24 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>
-                                                            Zip
+                                                            Password
                                                         </label>
                                                         <input class="form-control"
-                                                               type="text"
+                                                               type="password"
                                                                name="required1"
                                                                required="required"
-                                                               th:field="*{zip}"
                                                         />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>
-                                                            Status
-                                                        </label>
-                                                        <br/>
-                                                        <select name="status" class="form-control" required>
-                                                            <option selected="" disabled="">Select Status</option>
-                                                            <option value="ms">Bahasa Melayu</option>
-                                                        </select>
-                                                    </div>
+                                                    <label>
+                                                        Phone
+                                                    </label>
+                                                    <input class="form-control"
+                                                           type="text"
+                                                           name="required9"
+                                                           required="required"
+                                                    />
                                                 </div>
                                                 <br>
                                             </div>
@@ -99,84 +95,67 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label>
-                                                            Address
+                                                            Email
                                                         </label>
                                                         <input class="form-control"
                                                                type="text"
                                                                name="required3"
                                                                required="required"
-                                                               th:field="*{address}"
+                                                               email = "true"
                                                         />
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label>
-                                                            Representative
-                                                        </label>
-                                                        <input type="text" placeholder=".col-md-4"
-                                                               class="form-control" required="required"
-                                                        >
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Role
+                                                            </label>
+                                                            <select name="required11" class="form-control" required="required">
+                                                                <option selected="" disabled="">Select State</option>
+                                                                <option value="ms">Bahasa Melayu</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </fieldset>
                                             <br>
                                         </div>
                                     </fieldset>
-
-                                    <fieldset>
-                                        <div class="col-lg-8">
-                                            <fieldset>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label>
-                                                            Email
-                                                        </label>
-                                                        <input class="form-control"
-                                                               type="text"
-                                                               name="required5"
-                                                               required="required"
-                                                               email="true"
-                                                               th:field="*{email}"
-                                                        />
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label>
-                                                            Phone
-                                                        </label>
-                                                        <input class="form-control"
-                                                               type="text"
-                                                               name="required6"
-                                                               required="required"
-                                                               th:field="*{phone}"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                            <br>
-                                        </div>
-                                    </fieldset>
-
                                     <fieldset>
                                         <div class="col-lg-8">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <label>
-                                                        Establishment Date
-                                                    </label>
-                                                    <input type="date" class="form-control"
-                                                           name="required7"
-                                                           required="required"
-                                                           th:field="*{establishedDate}"
-                                                    />
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Company
+                                                        </label>
+                                                        <select name="required10" class="form-control" required="required">
+                                                            <option selected="" disabled="">Select State</option>
+                                                            <option value="ms">Bahasa Melayu</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Status
+                                                        </label>
+                                                        <select name="required12" class="form-control" required="required">
+                                                            <option selected="" disabled="">Select State</option>
+                                                            <option value="ms">Bahasa Melayu</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
+
                                             <br>
                                         </div>
                                     </fieldset>
 
+
+
                                     <div class="card-footer text-right">
                                         <button type="submit" class="btn btn-success btn-fill">Save Changes</button>
-                                        <a type="button" th:href="@{/company/registration}"
-                                           class="btn btn-wd">Cancel</a>
+                                        <a type="button" th:href="@{/user/registration}" class="btn btn-wd">Cancel</a>
                                     </div>
                                 </div>
                             </form>

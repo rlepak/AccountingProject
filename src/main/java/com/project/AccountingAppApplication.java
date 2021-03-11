@@ -12,5 +12,9 @@ public class AccountingAppApplication {
         SpringApplication.run(AccountingAppApplication.class, args);
     }
 
+    @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
+    }
 
 }
