@@ -1,11 +1,13 @@
 package com.project.repository;
 
-import com.project.entity.State;
+import com.project.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface StateRepository extends JpaRepository<State, Integer> {
+import java.util.Optional;
 
-    State findByCode(String code);
+@Repository
+public interface RolesRepository extends JpaRepository<Role, Long> {
+
+    Role findRoleById(Long id);
 }

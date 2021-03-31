@@ -9,4 +9,7 @@ public interface CompanyService {
 
     List<CompanyDto> listAllCompanies();
     CompanyDto save(CompanyDto companyDto) throws AccountingProjectException;
+    CompanyDto findByEmail(String email) throws AccountingProjectException;
+    CompanyDto findById(Long id) throws AccountingProjectException;
+    CompanyDto update (CompanyDto companyDto) throws AccountingProjectException;
 }

@@ -27,7 +27,7 @@ public class Invoice extends BaseEntity {
     private LocalDate invoiceDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private SPTable spTable;
+    private VendorClient vendorClient;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;

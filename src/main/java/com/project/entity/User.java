@@ -1,12 +1,15 @@
 package com.project.entity;
 
+import com.project.enums.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,12 +25,15 @@ public class User extends BaseEntity {
     private String firstName;
     private String lastName;
     private String password;
-    private boolean enabled;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     private String phone;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private Set<Role> roles = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;

@@ -1,5 +1,7 @@
 package com.project.dto;
 
+import com.project.entity.State;
+import com.project.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,8 @@ public class CompanyDto {
 
     private long Id;
     private String title;
-    private String state;
+    private State state;
+    private Status status;
     private String representative;
     private String email;
     private String address;

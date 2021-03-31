@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.project.enums.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,7 +8,6 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +22,10 @@ public class Company extends BaseEntity{
 
     private String address;
 
-    private String state;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "state_code")
+    private State state;
 
     private String zip;
 
@@ -34,22 +37,23 @@ public class Company extends BaseEntity{
 
     private LocalDate establishedDate;
 
-    private boolean enabled;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     private String phone;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Category> categories = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Product> products = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    private Set<SPTable> spTables = new HashSet<>();
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<VendorClient> vendorClients = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Invoice> invoices = new HashSet<>();
 }

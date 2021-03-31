@@ -6,7 +6,9 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,11 +18,13 @@ import java.util.Set;
 public class Role{
 
         @Id
-        int id;
+        Long id;
         private String description;
         private boolean enabled;
 
-        @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
+        @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
         private Set<User> users = new HashSet<>();
+
+
 
 }

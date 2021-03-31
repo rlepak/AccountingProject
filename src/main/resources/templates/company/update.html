@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <div th:replace="/fragments/cssFragment :: cssFragments"></div>
+    <div th:replace="/fragments/cssFragmentsInner :: cssFragmentsInner"></div>
     <title>Log in - Premier Accounting</title>
 </head>
 
@@ -23,14 +23,14 @@
                     <!-- Content start here -->
                     <div class="col-md-12">
                         <div class="card">
-                            <form id="registerFormValidation" th:action="@{/company/addCompany}" method="post"
+                            <form id="registerFormValidation" th:action="@{/company/update/{id}(id=${companyDto.id})}" method="post"
                                   th:object="${companyDto}">
                                 <div class="card-content">
                                     <a class="btn btn-primary" type="button" th:href="@{/company/registration}"><i
                                             class="ti-list"> </i> Company List
                                     </a>
                                     <br>
-                                    <h4 class="card-title">Add new Company</h4>
+                                    <h4 class="card-title">Update Company Information</h4>
                                     <fieldset>
                                         <div class="col-lg-8">
                                             <div class="row">

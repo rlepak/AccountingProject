@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <div th:replace="/fragments/cssFragment :: cssFragments"></div>
-    <title>Add User</title>
+    <div th:replace="/fragments/cssFragmentsInner :: cssFragmentsInner"></div>
+    <title>Log in - Premier Accounting</title>
 </head>
 
 
@@ -23,40 +23,39 @@
                     <!-- Content start here -->
                     <div class="col-md-12">
                         <div class="card">
-                            <form id="registerFormValidation" th:action="@{/vendor_client/addVendor_client}" method="post"
-                                  th:object="${vendorClientDto}">
+                            <form id="registerFormValidation" th:action="@{/user/update/{id}(id=${user.id})}" method="post" novalidate="" th:object="${user}">
                                 <div class="card-content">
-                                    <a class="btn btn-primary" type="button" th:href="@{/vendor_client/registration}"><i
-                                            class="ti-list"> </i> Vendor/Client List
+                                    <a class="btn btn-primary" type="button" th:href="@{/user/registration}"><i
+                                            class="ti-list"> </i> Users List
                                     </a>
                                     <br>
-                                    <h4 class="card-title">Add new Vendor/Client</h4>
+                                    <h4 class="card-title">Update User Information</h4>
                                     <fieldset>
                                         <div class="col-lg-8">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>
-                                                            Name
+                                                            Firs Name
                                                         </label>
                                                         <input class="form-control"
                                                                type="text"
                                                                name="required"
                                                                required="required"
-                                                               th:field="*{companyName}"
+                                                               th:field="*{firstName}"
                                                         />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>
-                                                            Zip Code
+                                                            Last Name
                                                         </label>
                                                         <input class="form-control"
                                                                type="text"
                                                                name="required6"
                                                                required="required"
-                                                               th:field="*{zipCode}"
+                                                               th:field="*{lastName}"
                                                         />
                                                     </div>
                                                 </div>
@@ -69,25 +68,23 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>
-                                                            Phone
+                                                            Password
                                                         </label>
                                                         <input class="form-control"
-                                                               type="text"
-                                                               name="required1"
-                                                               required="required"
-                                                               th:field="*{phone}"
+                                                               type="password"
+                                                               disabled
                                                         />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>
-                                                        Address
+                                                        Phone
                                                     </label>
                                                     <input class="form-control"
                                                            type="text"
                                                            name="required9"
                                                            required="required"
-                                                           th:field="*{address}"
+                                                           th:field="*{phone}"
                                                     />
                                                 </div>
                                                 <br>
@@ -113,67 +110,60 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>
-                                                                State
+                                                                Role
                                                             </label>
-
-                                                            <select  th:field="*{state}" class="form-control"
-                                                                    required="required">
+                                                            <select th:field="*{role.id}" class="form-control" required="required">
                                                                 <option th:value=" ''" th:text="Select"></option>
-                                                                <option th:each="state : ${states}"
-                                                                        th:value="${state.getCode}"
-                                                                        th:text="${state.getName}"></option>
+                                                                <option th:each="role : ${roles}"
+                                                                        th:value="${role.id}"
+                                                                        th:text="${role.description}">
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </fieldset>
-                                            <br>
                                         </div>
                                     </fieldset>
                                     <fieldset>
-                                        <div class="col-lg-4">
-                                            <label>
-                                                Type
-                                            </label>
-                                            <fieldset>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-2 col-sm-3">
-                                                        <div class="radio">
-                                                            <input type="radio" name="radio1" id="radio1" value="option1">
-                                                            <label for="radio1">
-                                                                Vendor
-                                                            </label>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-2 col-sm-3">
-                                                        <div class="radio">
-                                                            <input type="radio" name="radio1" id="radio2" value="option1">
-                                                            <label for="radio1">
-                                                                Client
-                                                            </label>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-2 col-sm-3">
-                                                        <div class="radio">
-                                                            <input type="radio" name="radio1" id="radio3" value="option1">
-                                                            <label for="radio1">
-                                                                Both
-                                                            </label>
-                                                            </label>
-                                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Company
+                                                        </label>
+                                                        <select th:field="*{company}" class="form-control" required="required">
+                                                            <option th:value=" ''" th:text="Select"></option>
+                                                            <option th:each="company : ${companies}"
+                                                                    th:value="${company.id}"
+                                                                    th:text="${company.title}">
+                                                            </option>
+                                                        </select>
                                                     </div>
                                                 </div>
-                                            </fieldset>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Status
+                                                        </label>
+                                                        <select name="status" class="form-control" required>
+                                                            <option selected="" disabled="">Select Status</option>
+                                                            <option th:field="*{status}" th:value="ACTIVE">Active
+                                                            </option>
+                                                            <option th:field="*{status}" th:value="CLOSED">Closed
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <br>
                                         </div>
                                     </fieldset>
-
-
                                     <div class="card-footer text-right">
                                         <button type="submit" class="btn btn-success btn-fill">Save Changes</button>
-                                        <a type="button" th:href="@{/vendor_client/registration}" class="btn btn-wd">Cancel</a>
+                                        <a type="button" th:href="@{/user/registration}" class="btn btn-wd">Cancel</a>
                                     </div>
                                 </div>
                             </form>

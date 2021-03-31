@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.project.enums.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Where(clause = "is_deleted=false")
-public class SPTable extends BaseEntity{
+public class VendorClient extends BaseEntity{
 
     private String companyName;
     private String phone;
@@ -22,13 +23,19 @@ public class SPTable extends BaseEntity{
     private String type;
     private String zipCode;
     private String address;
-    private String state;
-    private boolean enabled;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "state_code")
+    private State state;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 
-    @OneToMany(mappedBy = "spTable",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vendorClient",fetch = FetchType.LAZY)
     private Set<Invoice> invoices = new HashSet<>();
 
 
