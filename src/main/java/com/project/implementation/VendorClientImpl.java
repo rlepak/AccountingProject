@@ -34,7 +34,6 @@ public class VendorClientImpl implements VendorClientService {
     @Override
     public VendorClientDto save(VendorClientDto vendorClientDto) throws AccountingProjectException {
       VendorClient foundVendorClient = vendorClientRepository.findByEmail(vendorClientDto.getEmail());
-
       if (foundVendorClient!=null){
           throw  new AccountingProjectException("This Vendor/Client exist");
       }
@@ -71,5 +70,16 @@ public class VendorClientImpl implements VendorClientService {
         updatedVendorClient.setId(vendorClient.getId());
         vendorClientRepository.save(updatedVendorClient);
         return findByEmail(vendorClientDto.getEmail());
+    }
+
+    @Override
+    public void deleteVendorClient(String email) throws AccountingProjectException {
+
+        VendorClient vendorClient = vendorClientRepository.findByEmail(email);
+        if (vendorClient == null) {
+            throw new AccountingProjectException("Vendor/Client with " + email + " not exist");
+        }
+        vendorClient.setIsDeleted(true);
+        vendorClientRepository.save(vendorClient);
     }
 }

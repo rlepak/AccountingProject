@@ -228,13 +228,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="col-lg-3 col-md-6 col-sm-6" >
                                     <div class="card">
                                         <div class="card-content">
                                             <div class="row">
                                                 <div class="col-xs-5">
                                                     <div class="numbers pull-left">
-                                                        8,960
+
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-7">
@@ -332,7 +332,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="card">
+                                    <div class="card" th:object="${currencyDto}">
                                         <div class="card-header">
                                             <h4 class="card-title">Currency Exchange List</h4>
                                             <p class="category">Local Time</p>
@@ -345,20 +345,20 @@
                                                 <th>Yesterday</th>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
+                                                <tr >
                                                     <td>
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <img src="../assets/img/flags/CA.png" alt=""
                                                                      style="width:31px;height:25px;">
                                                             </div>
-                                                            <button class="btn btn-success btn-xs btn-fill">
-                                                                +0,06
+                                                            <button class="btn btn-info btn-xs btn-fill" >
+                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('CAD')-currencyDto.consumePreviewsCurrency().get('CAD'),0,7)}"></div>
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td>0,96</td>
-                                                    <td>0,90</td>
+                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('CAD')}"></td>
+                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('CAD')}"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -367,13 +367,13 @@
                                                                 <img src="../assets/img/flags/GB.png" alt=""
                                                                      style="width:31px;height:25px;">
                                                             </div>
-                                                            <button class="btn btn-success btn-xs btn-fill">
-                                                                +0,1
+                                                            <button class="btn btn-info btn-xs btn-fill" >
+                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('EUR')-currencyDto.consumePreviewsCurrency().get('EUR'),0,7)}"></div>
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td>1,57</td>
-                                                    <td>1,47</td>
+                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('EUR')}"></td>
+                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('EUR')}"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -382,13 +382,13 @@
                                                                 <img src="../assets/img/flags/AU.png" alt=""
                                                                      style="width:31px;height:25px;">
                                                             </div>
-                                                            <button class="btn btn-danger btn-xs btn-fill">
-                                                                -0,01
+                                                            <button class="btn btn-info btn-xs btn-fill" >
+                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('AUD')-currencyDto.consumePreviewsCurrency().get('AUD'),0,7)}"></div>
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td>0,87</td>
-                                                    <td>0,88</td>
+                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('AUD')}"></td>
+                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('AUD')}"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -397,13 +397,13 @@
                                                                 <img src="../assets/img/flags/CN.png" alt=""
                                                                      style="width:31px;height:25px;">
                                                             </div>
-                                                            <button class="btn btn-danger btn-xs btn-fill">
-                                                                -0,01
+                                                            <button class="btn btn-info btn-xs btn-fill" >
+                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('CNY')-currencyDto.consumePreviewsCurrency().get('CNY'),0,7)}"></div>
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td>0,87</td>
-                                                    <td>0,88</td>
+                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('CNY')}"></td>
+                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('CNY')}"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -412,13 +412,13 @@
                                                                 <img src="../assets/img/flags/UA.png" alt=""
                                                                      style="width:31px;height:25px;">
                                                             </div>
-                                                            <button class="btn btn-success btn-xs btn-fill">
-                                                                +0,38
+                                                            <button class="btn btn-info btn-xs btn-fill" >
+                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('PHP')-currencyDto.consumePreviewsCurrency().get('PHP'),0,7)}"></div>
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td>27,25</td>
-                                                    <td>26.97</td>
+                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('PHP')}"></td>
+                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('PHP')}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>

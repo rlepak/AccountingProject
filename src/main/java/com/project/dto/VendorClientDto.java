@@ -1,6 +1,8 @@
 package com.project.dto;
 
 import com.project.entity.State;
+import com.project.entity.VendorClient;
+import com.project.enums.ClientVendorType;
 import com.project.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,13 +15,15 @@ import lombok.Setter;
 @Setter
 public class VendorClientDto {
 
+    private long Id;
     private String companyName;
     private String zipCode;
     private String phone;
     private String address;
     private String email;
-    private State state;
-    private String type;
+    private String state;
+
+    private ClientVendorType type;
     private Status status;
 
 

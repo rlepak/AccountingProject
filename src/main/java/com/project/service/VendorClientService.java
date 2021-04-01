@@ -13,5 +13,5 @@ public interface VendorClientService {
     VendorClientDto findByEmail(String email) throws AccountingProjectException;
     VendorClientDto findById(Long id) throws AccountingProjectException;
     VendorClientDto update (VendorClientDto vendorClientDto) throws AccountingProjectException;
-
+    void deleteVendorClient(String email) throws AccountingProjectException;
 }

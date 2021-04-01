@@ -18,7 +18,7 @@ public class CompanyDto {
 
     private long Id;
     private String title;
-    private State state;
+    private String state;
     private Status status;
     private String representative;
     private String email;

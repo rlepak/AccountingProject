@@ -22,10 +22,10 @@ public class State{
     private String code;
     private String name;
 
-    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL)
-    private Set<Company> company = new HashSet<>();
-
-    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL)
-    private Set<VendorClient> vendorClient = new HashSet<>();
+//    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL)
+//    private Set<Company> company = new HashSet<>();
+//
+//    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL)
+//    private Set<VendorClient> vendorClients = new HashSet<>();
 
 }

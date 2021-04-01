@@ -123,7 +123,7 @@ values ('WI', 'Wisconsin');
 insert into state (code, name)
 values ('WY', 'Wyoming');
 
-insert into company(created_by, created_time, is_deleted, updated_by, updated_time, title, address, state_code, zip,
+insert into company(created_by, created_time, is_deleted, updated_by, updated_time, title, address, state, zip,
                     representative, email, established_date, status, phone)
 values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'LG', '110 Main', 'IL', '60022', 'Nick Smith',
         'Lg@gmail.com', '2021-01-05 00:00:00', 'ACTIVE', '770-032-2343'),
@@ -144,11 +144,11 @@ values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'user1@google
         '7739823232', 'ACTIVE', 2, 1);
 
 insert into vendor_client (created_by, created_time, is_deleted, updated_by, updated_time, address, company_name, email,
-                           phone, status, type, zip_code, company_id, state_code)
+                           phone, status, type, zip_code, company_id, state)
 values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', '100 Main', 'New way', 'newway@gmail.net',
-        '7739823232', 'ACTIVE', 'construction', '60132', 1, 'WI'),
+        '7739823232', 'ACTIVE', 'VENDOR', '60132', 1, 'WI'),
        (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', '234 Chicago', 'Easy', 'easy@gmail.net',
-        '5634563456', 'ACTIVE', 'transportation', '60544', 2, 'FL'),
+        '5634563456', 'ACTIVE', 'CLIENT', '60544', 2, 'FL'),
        (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', '500 North', 'Good Luck', 'good@gmail.net',
-        '35643654', 'ACTIVE', 'IT', '60132', 3, 'IL');
+        '35643654', 'ACTIVE', 'VENDOR', '60132', 3, 'IL');
 

@@ -54,7 +54,7 @@
                                                     <td th:text="${company.representative}"></td>
                                                     <td th:text="${company.email}"></td>
                                                     <td th:text="${company.zip}"></td>
-                                                    <td th:text="${company.state.code}"></td>
+                                                    <td th:text="${company.state}"></td>
                                                     <td th:switch="${company.status.value}">
                                                     <button th:case="Active" class="btn btn-xs btn-success">Active</button>
                                                     <button th:case="Closed" class="btn btn-xs btn-danger">Closed</button>

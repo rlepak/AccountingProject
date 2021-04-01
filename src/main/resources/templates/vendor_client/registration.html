@@ -48,6 +48,7 @@
                                                 <th data-field="state">State</th>
                                                 <th data-field="status">Status</th>
                                                 <th data-field="edit">Edit</th>
+                                                <th data-field="delete">Delete</th>
                                                 </thead>
                                                 <tbody>
                                                 <tr th:each="vendorClient : ${vendorsClients}">
@@ -55,15 +56,16 @@
                                                     <td th:text="${vendorClient.companyName}"></td>
                                                     <td th:text="${vendorClient.phone}"></td>
                                                     <td th:text="${vendorClient.email}"></td>
-                                                    <td th:text="${vendorClient.type}"></td>
+                                                    <td th:text="${vendorClient.type.value}"></td>
                                                     <td th:text="${vendorClient.zipCode}"></td>
                                                     <td th:text="${vendorClient.address}"></td>
-                                                    <td th:text="${vendorClient.state.code}"></td>
+                                                    <td th:text="${vendorClient.state}"></td>
                                                     <td th:switch="${vendorClient.status.value}">
                                                         <button th:case="Active" class="btn btn-xs btn-success">Active</button>
                                                         <button th:case="Closed" class="btn btn-xs btn-danger">Closed</button>
                                                     </td>
-                                                    <td> <i class="btn btn-simple btn-warning btn-icon table-action edit ti-pencil-alt"></i> </td>
+                                                    <td><a th:href="@{/vendor_client/update/{id}(id=${vendorClient.id})}" class="btn btn-simple btn-warning btn-icon table-action edit ti-pencil-alt"></a></td>
+                                                    <td><a th:href="@{/vendor_client/delete/{email}(email=${vendorClient.email})}" class="btn btn-simple btn-danger btn-icon table-action edit ti-trash"></a></td>
                                                 </tr>
 
                                                 </tbody>

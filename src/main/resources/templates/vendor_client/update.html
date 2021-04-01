@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <div th:replace="/fragments/cssFragment :: cssFragments"></div>
-    <title>Add User</title>
+    <div th:replace="/fragments/cssFragmentsInner :: cssFragmentsInner"></div>
+    <title>Update Vendor/Client</title>
 </head>
 
 
@@ -23,7 +23,7 @@
                     <!-- Content start here -->
                     <div class="col-md-12">
                         <div class="card">
-                            <form id="registerFormValidation" th:action="@{/vendor_client/addVendor_client}" method="post"
+                            <form id="registerFormValidation" th:action="@{/vendor_client/update/{id}(id=${vendorClientDto.id})}" method="post"
                                   th:object="${vendorClientDto}">
                                 <div class="card-content">
                                     <a class="btn btn-primary" type="button" th:href="@{/vendor_client/registration}"><i

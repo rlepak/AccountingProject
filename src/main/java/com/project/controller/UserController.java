@@ -69,7 +69,6 @@ public class UserController {
     public String deleteUser(@PathVariable("email") String email, UserDto userDto) throws AccountingProjectException {
         userService.deleteUser(email);
         return "redirect:/user/registration";
-
     }
 
 

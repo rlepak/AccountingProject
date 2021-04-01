@@ -23,9 +23,7 @@ public class Company extends BaseEntity{
     private String address;
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "state_code")
-    private State state;
+    private String state;
 
     private String zip;
 

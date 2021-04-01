@@ -71,7 +71,6 @@ public class CompanyServiceImpl implements CompanyService {
         updatedCompany.setId(company.getId());
         updatedCompany.setState(company.getState());
 
-
         companyRepository.save(updatedCompany);
         return findByEmail(companyDto.getEmail());
     }

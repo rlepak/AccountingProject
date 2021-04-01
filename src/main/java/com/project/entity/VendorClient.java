@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.project.enums.ClientVendorType;
 import com.project.enums.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,14 +21,13 @@ public class VendorClient extends BaseEntity{
     private String companyName;
     private String phone;
     private String email;
-    private String type;
+
+    @Enumerated(EnumType.STRING)
+    private ClientVendorType type;
     private String zipCode;
     private String address;
 
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "state_code")
-    private State state;
+    private String state;
 
     @Enumerated(EnumType.STRING)
     private Status status;
