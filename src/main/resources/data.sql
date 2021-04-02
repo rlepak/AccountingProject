@@ -152,3 +152,15 @@ values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', '100 Main', '
        (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', '500 North', 'Good Luck', 'good@gmail.net',
         '35643654', 'ACTIVE', 'VENDOR', '60132', 3, 'IL');
 
+insert into category (created_by, created_time, is_deleted, updated_by, updated_time, description, status, company_id)
+values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Electronic', 'ACTIVE' , 3),
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Food', 'ACTIVE' , 2),
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Automotive', 'ACTIVE' , 3),
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Industrial Goods', 'ACTIVE' , 1),
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Furniture', 'ACTIVE' , 2),
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Home Improvement', 'ACTIVE' , 1);
+
+insert into product (created_by, created_time, is_deleted, updated_by, updated_time, description, low_limit_alert, name,
+                           price, quantity,  status, tax, unit, category_id, company_id)
+values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Smart TV', FALSE , 'TV',
+        123, 4, 'ACTIVE', 9.5, 'PIECE', 1, 1);

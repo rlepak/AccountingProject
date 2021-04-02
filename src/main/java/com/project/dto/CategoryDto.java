@@ -1,5 +1,6 @@
 package com.project.dto;
 
+import com.project.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,6 @@ public class CategoryDto {
 
     private long id;
     private String description;
-    private boolean status;
+    private Status status;
 
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/cssFragment :: cssFragments"></div>
+    <title>Company Registration</title>
+</head>
+
+
+<body>
+<div class="wrapper">
+
+    <div th:replace="/fragments/leftSidebar :: left-sidebar"></div>
+
+    <div class="main-panel">
+
+        <div th:replace="/fragments/header :: header"></div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <!-- Content start here -->
+                    <div class="content" th:object="${categories}">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="toolbar">
+                                                <!--Here you can write extra buttons/actions for the toolbar-->
+                                            </div>
+                                            <div class="d-grid gap-2 col-6 mx-auto">
+                                                <a th:href="@{/category/addCategory}">
+                                                    <button class="btn btn-primary" type="button" th:href="login">+ Add Product Category</button>
+                                                </a>
+                                            </div>
+
+                                            <table id="bootstrap-table" class="table">
+                                                <thead>
+                                                <th data-field="id" class="text-center">ID</th>
+                                                <th data-field="description" data-sortable="true">Description</th>
+                                                <th data-field="status">Status</th>
+                                                <th data-field="edit">Edit</th>
+                                                <th data-field="delete">Delete</th>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="category : ${categories}">
+                                                    <td th:text="${categories.indexOf(category)+1}"></td>
+                                                    <td th:text="${category.description}"></td>
+                                                    <td th:switch="${category.status.value}">
+                                                        <button th:case="Active" class="btn btn-xs btn-success">Active</button>
+                                                        <button th:case="Closed" class="btn btn-xs btn-danger">Closed</button>
+                                                    </td>
+                                                    <td><a th:href="@{/category/update/{id}(id=${category.id})}" class="btn btn-simple btn-warning btn-icon table-action edit ti-pencil-alt"></a></td>
+                                                    <td><a th:href="@{/category/delete/{id}(id=${category.id})}" class="btn btn-simple btn-danger btn-icon table-action edit ti-trash"></a></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div><!--  end card  -->
+                                </div> <!-- end col-md-12 -->
+                            </div> <!-- end row -->
+                        </div>
+                    </div>
+
+                    <!-- Content end here -->
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div th:replace="/fragments/footer :: footer"></div>
+        </footer>
+    </div>
+</div>
+</body>
+<div th:replace="/fragments/jsFragment :: jsFragments"></div>
+</html>

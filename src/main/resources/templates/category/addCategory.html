@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/cssFragment :: cssFragments"></div>
+    <title>Add User</title>
+</head>
+
+
+<body>
+<div class="wrapper">
+
+    <div th:replace="/fragments/leftSidebar :: left-sidebar"></div>
+
+    <div class="main-panel">
+
+        <div th:replace="/fragments/header :: header"></div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <!-- Content start here -->
+                    <div class="col-md-12">
+                        <div class="card">
+                            <form id="registerFormValidation" th:action="@{/category/addCategory}"
+                                  method="post"
+                                  th:object="${categoryDto}"
+                            >
+                                <div class="card-content">
+                                    <a class="btn btn-primary" type="button" th:href="@{/category}"><i
+                                            class="ti-list"> </i> Products Category List
+                                    </a>
+                                    <br>
+                                    <h4 class="card-title">Add Product</h4>
+                                    <fieldset>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Description
+                                                        </label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               name="required"
+                                                               required="required"
+                                                               th:field="*{description}"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Status
+                                                        </label>
+                                                        <select name="status" class="form-control" required>
+                                                            <option selected="" disabled="">Select Status</option>
+                                                            <option th:field="*{status}" th:value="ACTIVE">Active
+                                                            </option>
+                                                            <option th:field="*{status}" th:value="CLOSED">Closed
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <div class="card-footer text-right">
+                                        <button type="submit" class="btn btn-success btn-fill">Save Changes</button>
+                                        <a type="button" th:href="@{/category}" class="btn btn-wd">Cancel</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Content end here -->
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div th:replace="/fragments/footer :: footer"></div>
+        </footer>
+    </div>
+</div>
+</body>
+<div th:replace="/fragments/jsFragment :: jsFragments"></div>
+
+
+</html>

@@ -1,5 +1,7 @@
 package com.project.dto;
 
+import com.project.entity.Category;
+import com.project.enums.Status;
 import com.project.enums.Unit;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,10 +17,11 @@ public class ProductDto {
     private long id;
     private String productName;
     private String description;
-    private InvoiceProductDto invoiceProductDto;
-    private Unit unitType;
-    private String category;
-    private boolean status;
+    private int quantity;
+//    private InvoiceProductDto invoiceProductDto;
+    private Unit unit;
+    private Category category;
+    private Status status;
     private double tax;
 
 

@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.project.enums.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +18,9 @@ import java.util.Set;
 public class Category extends BaseEntity{
 
     private String description;
-    private boolean enabled;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "category_id")

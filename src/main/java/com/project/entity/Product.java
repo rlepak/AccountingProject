@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.project.enums.Status;
 import com.project.enums.Unit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Set;
 @Where(clause = "is_deleted=false")
 public class Product extends BaseEntity{
 
+
     private String name;
     private String description;
     private int quantity;
@@ -24,9 +26,12 @@ public class Product extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     private Unit unit;
-    private double lowLimitAlert;
+
+    private boolean lowLimitAlert;
     private double tax;
-    private boolean enabled;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;

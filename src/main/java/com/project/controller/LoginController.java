@@ -21,8 +21,8 @@ public class LoginController {
 
     @RequestMapping("/index")
     public String welcome(Model model){
-        CurrencyExchangeDto currencyExchangeDto = new CurrencyExchangeDto();
-        model.addAttribute("currencyDto", currencyExchangeDto);
+//        CurrencyExchangeDto currencyExchangeDto = new CurrencyExchangeDto();
+//        model.addAttribute("currencyDto", currencyExchangeDto);
         return "index";
     }
 }

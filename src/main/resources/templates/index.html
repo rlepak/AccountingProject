@@ -332,7 +332,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="card" th:object="${currencyDto}">
+<!--                                    th:object="${currencyDto}"-->
+                                    <div class="card" >
                                         <div class="card-header">
                                             <h4 class="card-title">Currency Exchange List</h4>
                                             <p class="category">Local Time</p>
@@ -353,12 +354,15 @@
                                                                      style="width:31px;height:25px;">
                                                             </div>
                                                             <button class="btn btn-info btn-xs btn-fill" >
-                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('CAD')-currencyDto.consumePreviewsCurrency().get('CAD'),0,7)}"></div>
+<!--                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('CAD')-currencyDto.consumePreviewsCurrency().get('CAD'),0,7)}"></div>-->
+                                                                    12
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('CAD')}"></td>
-                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('CAD')}"></td>
+<!--                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('CAD')}"></td>-->
+<!--                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('CAD')}"></td>-->
+                                                    <td>42</td>
+                                                    <td>23</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -368,12 +372,16 @@
                                                                      style="width:31px;height:25px;">
                                                             </div>
                                                             <button class="btn btn-info btn-xs btn-fill" >
-                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('EUR')-currencyDto.consumePreviewsCurrency().get('EUR'),0,7)}"></div>
+                                                                    4
+<!--                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('EUR')-currencyDto.consumePreviewsCurrency().get('EUR'),0,7)}"></div>-->
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('EUR')}"></td>
-                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('EUR')}"></td>
+<!--                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('EUR')}"></td>-->
+<!--                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('EUR')}"></td>-->
+                                                    <td>42</td>
+                                                    <td>23</td>
+                                                    <th></th>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -383,12 +391,15 @@
                                                                      style="width:31px;height:25px;">
                                                             </div>
                                                             <button class="btn btn-info btn-xs btn-fill" >
-                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('AUD')-currencyDto.consumePreviewsCurrency().get('AUD'),0,7)}"></div>
+<!--                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('AUD')-currencyDto.consumePreviewsCurrency().get('AUD'),0,7)}"></div>-->
+                                                                5
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('AUD')}"></td>
-                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('AUD')}"></td>
+<!--                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('AUD')}"></td>-->
+<!--                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('AUD')}"></td>-->
+                                                    <td>42</td>
+                                                    <td>23</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -398,12 +409,15 @@
                                                                      style="width:31px;height:25px;">
                                                             </div>
                                                             <button class="btn btn-info btn-xs btn-fill" >
-                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('CNY')-currencyDto.consumePreviewsCurrency().get('CNY'),0,7)}"></div>
+<!--                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('CNY')-currencyDto.consumePreviewsCurrency().get('CNY'),0,7)}"></div>-->
+                                                                4
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('CNY')}"></td>
-                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('CNY')}"></td>
+<!--                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('CNY')}"></td>-->
+<!--                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('CNY')}"></td>-->
+                                                    <td>42</td>
+                                                    <td>23</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -413,12 +427,15 @@
                                                                      style="width:31px;height:25px;">
                                                             </div>
                                                             <button class="btn btn-info btn-xs btn-fill" >
-                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('PHP')-currencyDto.consumePreviewsCurrency().get('PHP'),0,7)}"></div>
+<!--                                                                <div th:text="${#strings.substring(currencyDto.consumeCurrentCurrency().get('PHP')-currencyDto.consumePreviewsCurrency().get('PHP'),0,7)}"></div>-->
+                                                                3
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('PHP')}"></td>
-                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('PHP')}"></td>
+<!--                                                    <td th:text="${currencyDto.consumeCurrentCurrency().get('PHP')}"></td>-->
+<!--                                                    <td th:text="${currencyDto.consumePreviewsCurrency().get('PHP')}"></td>-->
+                                                    <td>42</td>
+                                                    <td>23</td>
                                                 </tr>
                                                 </tbody>
                                             </table>

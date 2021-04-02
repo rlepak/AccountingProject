@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/cssFragment :: cssFragments"></div>
+    <title>Add User</title>
+</head>
+
+
+<body>
+<div class="wrapper">
+
+    <div th:replace="/fragments/leftSidebar :: left-sidebar"></div>
+
+    <div class="main-panel">
+
+        <div th:replace="/fragments/header :: header"></div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <!-- Content start here -->
+                    <div class="col-md-12">
+                        <div class="card">
+                            <form id="registerFormValidation" th:action="@{/product/addProduct}"
+                                  method="post"
+                                  th:object="${productDto}"
+                            >
+                                <div class="card-content">
+                                    <a class="btn btn-primary" type="button" th:href="@{/product}"><i
+                                            class="ti-list"> </i> Products List
+                                    </a>
+                                    <br>
+                                    <h4 class="card-title">Add Product</h4>
+                                    <fieldset>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Name
+                                                        </label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               name="required"
+                                                               required="required"
+                                                               th:field="*{productName}"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Description
+                                                        </label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               name="required6"
+                                                               required="required"
+                                                               th:field="*{description}"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Quantity
+                                                        </label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               name="required1"
+                                                               required="required"
+                                                               th:field="*{quantity}"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>
+                                                        Tax
+                                                    </label>
+                                                    <input class="form-control"
+                                                           type="number"
+                                                           name="required9"
+                                                           required="required"
+                                                           th:field="*{tax}"
+                                                    />
+                                                </div>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="col-lg-8">
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>
+                                                            Category
+                                                        </label>
+                                                        <select  th:field="*{category}"  class="form-control"
+                                                            required="required">
+                                                            <option th:value=" ''" th:text="Select"></option>
+                                                            <option th:each="category : ${categories}"
+                                                                    th:value="${category.id}"
+                                                                    th:text="${category.description}"></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Unit
+                                                            </label>
+                                                            <select name="unit" class="form-control" required>
+                                                                <option selected="" disabled="">Select Unit</option>
+                                                                <option th:field="*{unit}" th:value="PIECE">Piece
+                                                                </option>
+                                                                <option th:field="*{unit}" th:value="ITEM">Item
+                                                                </option>
+                                                                <option th:field="*{unit}" th:value="KG">KG
+                                                                </option>
+                                                                <option th:field="*{unit}" th:value="LB">LB
+                                                                </option>
+                                                                <option th:field="*{unit}" th:value="METER">Meter
+                                                                </option>
+                                                                <option th:field="*{unit}" th:value="GALLON">Gallon
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Status
+                                                        </label>
+                                                        <select name="status" class="form-control" required>
+                                                            <option selected="" disabled="">Select Status</option>
+                                                            <option th:field="*{status}" th:value="ACTIVE">Active
+                                                            </option>
+                                                            <option th:field="*{status}" th:value="CLOSED">Closed
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <div class="card-footer text-right">
+                                        <button type="submit" class="btn btn-success btn-fill">Save Changes</button>
+                                        <a type="button" th:href="@{/product}" class="btn btn-wd">Cancel</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Content end here -->
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div th:replace="/fragments/footer :: footer"></div>
+        </footer>
+    </div>
+</div>
+</body>
+<div th:replace="/fragments/jsFragment :: jsFragments"></div>
+
+
+</html>
