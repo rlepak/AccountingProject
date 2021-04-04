@@ -17,7 +17,9 @@ public class CurrencyExchangeDto {
 
     public Map<String, Object> consumeCurrentCurrency(){
         RestTemplate restTemplate = new RestTemplate();
-        String url = "https://api.exchangeratesapi.io/latest?base=USD";
+        String url = "http://api.exchangeratesapi.io/latest?access_key=7a71216ace8700e67802ee928c3b7ac5";
+
+
 
         Object currentCurrency = restTemplate.getForObject(url, Object.class);
 
@@ -31,7 +33,7 @@ public class CurrencyExchangeDto {
     public Map<String, Object> consumePreviewsCurrency(){
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "https://api.exchangeratesapi.io/history?start_at="+LocalDate.now().minusDays(1)+"&end_at="+LocalDate.now().minusDays(1)+"&base=USD";
+        String url = "https://api.exchangeratesapi.io/history?start_at="+LocalDate.now().minusDays(1)+"&end_at="+LocalDate.now().minusDays(1)+"&?access_key=7a71216ace8700e67802ee928c3b7ac5";
 
         Object previewsCurrency = restTemplate.getForObject(url, Object.class);
 

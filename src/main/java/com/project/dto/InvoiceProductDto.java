@@ -11,6 +11,8 @@ import lombok.Setter;
 @Setter
 public class InvoiceProductDto {
 
+    private long Id;
     private double unitPrice;
     private double quantity;
+    private double total = unitPrice*quantity;
 }

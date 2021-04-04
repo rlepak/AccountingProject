@@ -15,14 +15,29 @@ import java.time.LocalDate;
 @Setter
 public class InvoiceDto {
 
+    private long id;
+
     private String invoiceNumber;
 
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate invoiceDate;
+
+    private VendorClientDto vendorClient;
+
+    private double cost;
+
+    private double tax = 0.9;
+
+    private double total=cost*tax;
 
     private InvoiceProductDto invoiceProductDto;
 
-    private Company company;
+    private ProductDto productDto;
+
+    private CompanyDto companyDto;
+
+
+
 
 
 }

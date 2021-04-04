@@ -164,3 +164,9 @@ insert into product (created_by, created_time, is_deleted, updated_by, updated_t
                            price, quantity,  status, tax, unit, category_id, company_id)
 values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Smart TV', FALSE , 'TV',
         123, 4, 'ACTIVE', 9.5, 'PIECE', 1, 1);
+
+
+insert into invoice (created_by, created_time, is_deleted, updated_by, updated_time, invoice_date, invoice_number, invoice_type,
+                      company_id, vendor_client_id)
+values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', '2021-01-05', 23 , 'PURCHASE',
+         1, 1);

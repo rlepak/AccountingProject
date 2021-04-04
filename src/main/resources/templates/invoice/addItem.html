@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/cssFragmentsInner :: cssFragmentsInner"></div>
+    <title>Update Vendor/Client</title>
+</head>
+
+<body>
+<div class="wrapper">
+
+    <div th:replace="/fragments/leftSidebar :: left-sidebar"></div>
+
+    <div class="main-panel">
+
+        <div th:replace="/fragments/header :: header"></div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <!-- Content start here -->
+                    <div class="col-md-12">
+                        <div class="card">
+                            <form id="registerFormValidation" th:action="@{/invoice/addInvoice}"
+                                  method="post"
+                                  th:object="${invoiceDto}"
+                            >
+                                <div class="card-content">
+                                    <a class="btn btn-primary" type="button" th:href="@{/invoice/purchaseInvoice}"><i
+                                            class="ti-list"> </i> Purchase Invoice List
+                                    </a>
+                                    <br>
+                                    <h4 class="card-title">Add Item to Invoice</h4>
+                                    <fieldset>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>
+                                                        Invoice No
+                                                    </label>
+                                                    <input class="form-control"
+                                                           type="number"
+                                                           disabled
+                                                    />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>
+                                                        Invoice Date
+                                                    </label>
+                                                    <input class="form-control"
+                                                           type="number"
+                                                           disabled
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>
+                                                        Vendor
+                                                    </label>
+                                                    <input class="form-control"
+                                                           type="number"
+                                                           disabled
+                                                    />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>
+                                                        Product
+                                                    </label>
+                                                    <!--                                                    th:field="*{productDto}"-->
+                                                    <select class="form-control" required="required">
+                                                        <option th:value=" ''" th:text="Select"></option>
+                                                        <option th:each="product : ${products}"
+                                                                th:value="${product.id}"
+                                                                th:text="${product.description}">
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>
+                                                        Quantity
+                                                    </label>
+                                                    <input class="form-control"
+                                                           type="number"
+                                                           name="required9"
+                                                           required="required"
+                                                    />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>
+                                                        Price
+                                                    </label>
+                                                    <input class="form-control"
+                                                           type="number"
+                                                           name="required9"
+                                                           required="required"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <br>
+                                                <div class="card-footer text-right">
+                                                    <button type="submit" class="btn btn-info btn-fill">Add Item
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </form>
+                            <div class="card-content table-responsive table-full-width">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <th data-field="product" class="text-center">Product</th>
+                                    <th data-field="price" data-sortable="true">Price</th>
+                                    <th data-field="quantity" data-sortable="true">Quantity</th>
+                                    <th data-field="total">Total</th>
+                                    <th data-field="delete">Delete</th>
+                                    </thead>
+                                    <tbody>
+                                    <!--                                                                    <tr th:each="product : ${productsByInvoice}">-->
+                                    <!--                                                                        <td ></td>-->
+                                    <!--                                                                        <td th:text="${product.unitPrice}"></td>-->
+                                    <!--                                                                        <td th:text="${product.quantity}"></td>-->
+                                    <!--                                                                        <td th:text="${product.total}"></td>-->
+                                    <!--                                                                        <td> class="btn btn-simple btn-warning btn-icon table-action edit ti-pencil-alt"></a></td>-->
+                                    <!--                                                                    </tr>-->
+                                    </tbody>
+                                </table>
+                                <div class="card-footer text-right">
+                                    <button type="submit" class="btn btn-success btn-fill">Done</button>
+                                    <button type="submit" class="btn btn-danger btn-fill">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content end here -->
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div th:replace="/fragments/footer :: footer"></div>
+        </footer>
+    </div>
+</div>
+</body>
+<div th:replace="/fragments/jsFragment :: jsFragments"></div>
+
+
+</html>

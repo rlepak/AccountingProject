@@ -1,6 +1,7 @@
 package com.project.entity;
 
 import com.project.enums.InvoiceType;
+import com.project.enums.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,7 @@ import java.util.Set;
 public class Invoice extends BaseEntity {
 
     private String invoiceNumber;
-    private String invoiceStatus;
+
 
     @Enumerated(EnumType.STRING)
     private InvoiceType invoiceType;
@@ -32,8 +33,9 @@ public class Invoice extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 
-    private boolean enabled;
+//    @Enumerated(EnumType.STRING)
+//    private Status status;
 
-    @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<InvoiceProduct> invoiceProducts = new HashSet<>();
 }

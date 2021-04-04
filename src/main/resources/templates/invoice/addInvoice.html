@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/cssFragment :: cssFragments"></div>
+    <title>Add User</title>
+</head>
+
+
+<body>
+<div class="wrapper">
+
+    <div th:replace="/fragments/leftSidebar :: left-sidebar"></div>
+
+    <div class="main-panel">
+
+        <div th:replace="/fragments/header :: header"></div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <!-- Content start here -->
+                    <div class="col-md-12">
+                        <div class="card">
+                            <form id="registerFormValidation" th:object="${invoiceDto}" th:action="@{/invoice/addInvoice/{id}(id=${invoiceDto.invoiceNumber})}"
+                                  method="post"
+                            >
+                                <div class="card-content">
+                                    <a class="btn btn-primary" type="button" th:href="@{/invoice/purchaseInvoice}"><i
+                                            class="ti-list"> </i> Purchase Invoice List
+                                    </a>
+                                    <br>
+                                    <h4 class="card-title">Create new Purchase Invoice</h4>
+                                    <fieldset>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Invoice No
+                                                        </label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               name="required"
+                                                               required="required"
+                                                               th:field="*{invoiceNumber}"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Vendor
+                                                        </label>
+                                                        <select th:field="*{vendorClient}" class="form-control" required="required">
+                                                            <option th:value=" ''" th:text="Select"></option>
+                                                            <option th:each="vendor : ${vendors}"
+                                                                    th:value="${vendor.id}"
+                                                                    th:text="${vendor.companyName}">
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Invoice Date
+                                                        </label>
+                                                        <input class="form-control"
+                                                               type="date"
+                                                               name="required6"
+                                                               required="required"
+                                                               th:field="*{invoiceDate}"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <br>
+                                                <div class="card-footer text-right">
+                                                    <button type="submit" class="btn btn-success btn-fill" >Create Invoice
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Content end here -->
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div th:replace="/fragments/footer :: footer"></div>
+        </footer>
+    </div>
+</div>
+</body>
+<div th:replace="/fragments/jsFragment :: jsFragments"></div>
+
+
+</html>
