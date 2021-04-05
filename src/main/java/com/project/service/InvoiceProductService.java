@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface InvoiceProductService {
 
-    List<InvoiceProductDto> findAllByInvoiceId(long id);
+    List<InvoiceProductDto> findAllByInvoiceNumber(String invoiceNumber);
     InvoiceProductDto save(InvoiceProductDto invoiceProductDto) throws AccountingProjectException;
     InvoiceProductDto findById(Long id) throws AccountingProjectException;
-
+    void deleteInvoiceProduct(Long id) throws AccountingProjectException;
 
 }

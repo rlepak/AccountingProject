@@ -11,5 +11,5 @@ public interface InvoiceService {
     InvoiceDto savePurchaseInvoice(InvoiceDto invoiceDto) throws AccountingProjectException;
     InvoiceDto findById(Long id) throws AccountingProjectException;
     InvoiceDto update (InvoiceDto invoiceDto) throws AccountingProjectException;
-    List<InvoiceDto> findAllByInvoiceNumber(String invoiceNumber);
+    InvoiceDto findByInvoiceNumber(String invoiceNumber);
 }

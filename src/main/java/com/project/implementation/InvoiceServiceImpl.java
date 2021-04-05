@@ -41,7 +41,6 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
         Invoice invoiceObject = mapperUtil.convert(invoiceDto, new Invoice());
         invoiceObject.setInvoiceType(InvoiceType.PURCHASE);
-
         Invoice savedInvoice = invoiceRepository.save(invoiceObject);
         return mapperUtil.convert(savedInvoice, new InvoiceDto());
     }
@@ -65,8 +64,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public List<InvoiceDto> findAllByInvoiceNumber(String invoiceNumber) {
-        List<Invoice> listByInvoiceNumber = invoiceRepository.findAllByInvoiceNumber(invoiceNumber);
-        return listByInvoiceNumber.stream().map(invoice -> mapperUtil.convert(invoice, new InvoiceDto())).collect(Collectors.toList());
+    public InvoiceDto findByInvoiceNumber(String invoiceNumber) {
+        Invoice invoice = invoiceRepository.findByInvoiceNumber(invoiceNumber);
+        return mapperUtil.convert(invoice, new InvoiceDto());
     }
 }

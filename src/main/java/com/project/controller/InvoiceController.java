@@ -1,7 +1,10 @@
 package com.project.controller;
 
 import com.project.dto.InvoiceDto;
+import com.project.dto.InvoiceProductDto;
+import com.project.dto.UserDto;
 import com.project.exception.AccountingProjectException;
+import com.project.repository.InvoiceRepository;
 import com.project.service.InvoiceProductService;
 import com.project.service.InvoiceService;
 import com.project.service.ProductService;
@@ -9,6 +12,7 @@ import com.project.service.VendorClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,16 +20,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/invoice")
 public class InvoiceController {
 
+    //to keep invoice number
+    String URI;
+
     private InvoiceService invoiceService;
     private ProductService productService;
     private VendorClientService vendorClientService;
     private InvoiceProductService invoiceProductService;
+    private InvoiceRepository invoiceRepository;
 
-    public InvoiceController(InvoiceService invoiceService, ProductService productService, VendorClientService vendorClientService, InvoiceProductService invoiceProductService) {
+    public InvoiceController(InvoiceService invoiceService, ProductService productService, VendorClientService vendorClientService, InvoiceProductService invoiceProductService, InvoiceRepository invoiceRepository) {
         this.invoiceService = invoiceService;
         this.productService = productService;
         this.vendorClientService = vendorClientService;
         this.invoiceProductService = invoiceProductService;
+        this.invoiceRepository = invoiceRepository;
     }
 
     @GetMapping("/purchaseInvoice")
@@ -44,13 +53,31 @@ public class InvoiceController {
     public String createInvoice(InvoiceDto invoiceDto, Model model) throws AccountingProjectException {
         model.addAttribute("invoiceDto", new InvoiceDto());
         invoiceService.savePurchaseInvoice(invoiceDto);
-        return "redirect:/invoice/addItem";
+        return "redirect:/invoice/addItem/" + invoiceDto.getInvoiceNumber();
     }
 
-    @GetMapping("/addItem")
-    public String addItem(Model model) {
+    @GetMapping("/addItem/{invoiceNo}")
+    public String addItem(@PathVariable("invoiceNo") String invoiceNo, Model model) throws AccountingProjectException {
+        model.addAttribute("invoiceProduct", new InvoiceProductDto());
+        model.addAttribute("invoiceProducts", invoiceProductService.findAllByInvoiceNumber(invoiceNo));
+        model.addAttribute("invoiceDto", invoiceService.findByInvoiceNumber(invoiceNo));
         model.addAttribute("products", productService.listAllProducts());
+        URI = invoiceNo;
         return "/invoice/addItem";
+    }
+
+    @PostMapping("/addItem")
+    public String createItem(InvoiceProductDto invoiceProductDto, Model model) throws AccountingProjectException {
+        model.addAttribute("productInvoice", new InvoiceProductDto());
+        invoiceProductDto.setInvoice(invoiceRepository.findByInvoiceNumber(URI));
+        invoiceProductService.save(invoiceProductDto);
+        return "redirect:/invoice/addItem/" + URI;
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id) throws AccountingProjectException {
+        invoiceProductService.deleteInvoiceProduct(id);
+        return "redirect:/invoice/addItem/" + URI;
     }
 
 }

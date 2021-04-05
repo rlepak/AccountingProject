@@ -1,5 +1,7 @@
 package com.project.dto;
 
+import com.project.entity.Invoice;
+import com.project.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,12 @@ import lombok.Setter;
 public class InvoiceProductDto {
 
     private long Id;
+    private Product product;
+    private Invoice invoice;
     private double unitPrice;
     private double quantity;
-    private double total = unitPrice*quantity;
+    private double total;
+
+
+
 }

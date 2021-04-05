@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
-    List<Invoice> findAllByInvoiceNumber(String invoiceNumber);
+    Invoice findByInvoiceNumber(String invoiceNumber);
+
 
 }
