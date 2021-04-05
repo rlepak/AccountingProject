@@ -33,8 +33,8 @@ public class Invoice extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 
-//    @Enumerated(EnumType.STRING)
-//    private Status status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<InvoiceProduct> invoiceProducts = new HashSet<>();

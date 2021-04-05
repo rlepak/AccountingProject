@@ -32,7 +32,9 @@
                                             </div>
                                             <div class="d-grid gap-2 col-6 mx-auto">
                                                 <a th:href="@{/invoice/addInvoice}">
-                                                    <button class="btn btn-primary" type="button" th:href="login">+ Create Purchase Invoice</button>
+                                                    <button class="btn btn-primary" type="button" th:href="login">+
+                                                        Create Purchase Invoice
+                                                    </button>
                                                 </a>
                                             </div>
 
@@ -44,7 +46,7 @@
                                                 <th data-field="cost" data-sortable="true">Cost</th>
                                                 <th data-field="tax">Tax</th>
                                                 <th data-field="total">Total</th>
-                                                <th data-field="addLineItem">Add Line Item</th>
+                                                <th data-field="addLineItem">Edit Invoice/add item</th>
                                                 <th></th>
                                                 </thead>
                                                 <tbody>
@@ -55,8 +57,22 @@
                                                     <td th:text="${purchaseInvoice.cost}"></td>
                                                     <td th:text="${purchaseInvoice.tax}"></td>
                                                     <td th:text="${purchaseInvoice.total}"></td>
-                                                    <td><a th:href="@{/invoice/update/{id}(id=${purchaseInvoice.id})}" class="btn btn-simple btn-warning btn-icon table-action edit ti-pencil-alt"></a></td>
-                                                    <td></td>
+                                                    <td><a th:href="@{/invoice/addItem/{id}(id=${purchaseInvoice.invoiceNumber})}"
+                                                           class="btn btn-simple btn-warning btn-icon table-action edit ti-pencil-alt"></a>
+                                                    </td>
+                                                    <td th:switch="${purchaseInvoice.status.value}">
+                                                        <div th:case="Active">
+                                                            <a th:href="@{/invoice/confirm/{id}(id=${purchaseInvoice.invoiceNumber})}" class="btn btn-success btn-fill">
+                                                                Approve
+                                                            </a>
+                                                            <a th:href="@{/invoice/delete/{id}(id=${purchaseInvoice.invoiceNumber})}" class="btn btn-danger btn-fill">
+                                                                Delete
+                                                            </a>
+                                                        </div>
+                                                            <a th:case="Closed" class="btn btn-neutral btn-fill">
+                                                                Print Invoice
+                                                            </a>
+                                                    </td>
                                                 </tr>
                                                 </tbody>
                                             </table>

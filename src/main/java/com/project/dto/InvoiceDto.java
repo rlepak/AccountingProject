@@ -1,6 +1,7 @@
 package com.project.dto;
 
 import com.project.entity.Company;
+import com.project.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,9 @@ public class InvoiceDto {
     private ProductDto productDto;
 
     private CompanyDto companyDto;
+
+    private Status status;
+
 
 
 

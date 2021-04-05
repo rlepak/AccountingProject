@@ -148,8 +148,8 @@
                                     </tbody>
                                 </table>
                                 <div class="card-footer text-right">
-                                    <button type="submit" class="btn btn-success btn-fill">Done</button>
-                                    <button type="submit" class="btn btn-danger btn-fill">Cancel</button>
+                                    <a th:href="@{/invoice/purchaseInvoice}" class="btn btn-success btn-fill">Done</a>
+                                    <a th:href="@{/invoice/delete/{id}(id=${invoiceDto.invoiceNumber})}" class="btn btn-danger btn-fill">Delete Invoice</a>
                                 </div>
                             </div>
                         </div>

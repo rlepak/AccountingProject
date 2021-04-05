@@ -75,9 +75,15 @@ public class InvoiceController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id) throws AccountingProjectException {
-        invoiceProductService.deleteInvoiceProduct(id);
-        return "redirect:/invoice/addItem/" + URI;
+    public String deleteInvoice(@PathVariable("id") String id) throws AccountingProjectException {
+        invoiceService.deleteByInvoiceNumber(id);
+        return "redirect:/invoice/purchaseInvoice";
+    }
+
+    @GetMapping("/confirm/{id}")
+    public String approveInvoice(@PathVariable("id") String id) throws AccountingProjectException {
+        invoiceService.approveInvoice(invoiceService.findByInvoiceNumber(id));
+        return "redirect:/invoice/purchaseInvoice";
     }
 
 }

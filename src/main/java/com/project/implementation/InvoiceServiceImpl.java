@@ -3,9 +3,13 @@ package com.project.implementation;
 import com.project.dto.InvoiceDto;
 import com.project.dto.ProductDto;
 import com.project.entity.Invoice;
+import com.project.entity.InvoiceProduct;
 import com.project.entity.Product;
+import com.project.entity.User;
 import com.project.enums.InvoiceType;
+import com.project.enums.Status;
 import com.project.exception.AccountingProjectException;
+import com.project.repository.InvoiceProductRepository;
 import com.project.repository.InvoiceRepository;
 import com.project.service.InvoiceService;
 import com.project.util.MapperUtil;
@@ -20,12 +24,13 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     private MapperUtil mapperUtil;
     private InvoiceRepository invoiceRepository;
+    private InvoiceProductRepository invoiceProductRepository;
 
-    public InvoiceServiceImpl(MapperUtil mapperUtil, InvoiceRepository invoiceRepository) {
+    public InvoiceServiceImpl(MapperUtil mapperUtil, InvoiceRepository invoiceRepository, InvoiceProductRepository invoiceProductRepository) {
         this.mapperUtil = mapperUtil;
         this.invoiceRepository = invoiceRepository;
+        this.invoiceProductRepository = invoiceProductRepository;
     }
-
 
     @Override
     public List<InvoiceDto> listAllInvoices() {
@@ -41,6 +46,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
         Invoice invoiceObject = mapperUtil.convert(invoiceDto, new Invoice());
         invoiceObject.setInvoiceType(InvoiceType.PURCHASE);
+        invoiceObject.setStatus(Status.ACTIVE);
         Invoice savedInvoice = invoiceRepository.save(invoiceObject);
         return mapperUtil.convert(savedInvoice, new InvoiceDto());
     }
@@ -67,5 +73,27 @@ public class InvoiceServiceImpl implements InvoiceService {
     public InvoiceDto findByInvoiceNumber(String invoiceNumber) {
         Invoice invoice = invoiceRepository.findByInvoiceNumber(invoiceNumber);
         return mapperUtil.convert(invoice, new InvoiceDto());
+    }
+
+    @Override
+    public void deleteByInvoiceNumber(String invoiceNumber) throws AccountingProjectException {
+        Invoice invoice = invoiceRepository.findByInvoiceNumber(invoiceNumber);
+        if (invoice == null) {
+            throw new AccountingProjectException("Invoice with " + invoiceNumber + " not exist");
+        }
+
+        List<InvoiceProduct> invoiceProductList = invoiceProductRepository.findAllByInvoiceInvoiceNumber(invoiceNumber);
+        invoiceProductList.forEach(i->i.setIsDeleted(true));
+        invoice.setIsDeleted(true);
+        invoiceRepository.save(invoice);
+    }
+
+    @Override
+    public InvoiceDto approveInvoice(InvoiceDto invoiceDto) throws AccountingProjectException {
+        Invoice invoice = invoiceRepository.findById(invoiceDto.getId()).orElse(null);
+        invoice.setId(invoice.getId());
+        invoice.setStatus(Status.CLOSED);
+        invoiceRepository.save(invoice);
+        return findById(invoiceDto.getId());
     }
 }

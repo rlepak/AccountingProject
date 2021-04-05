@@ -12,4 +12,7 @@ public interface InvoiceService {
     InvoiceDto findById(Long id) throws AccountingProjectException;
     InvoiceDto update (InvoiceDto invoiceDto) throws AccountingProjectException;
     InvoiceDto findByInvoiceNumber(String invoiceNumber);
+    void deleteByInvoiceNumber(String invoiceNumber) throws AccountingProjectException;
+    InvoiceDto approveInvoice(InvoiceDto invoiceDto) throws AccountingProjectException;
+
 }

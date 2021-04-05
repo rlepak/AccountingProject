@@ -167,6 +167,6 @@ values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Smart TV', F
 
 
 insert into invoice (created_by, created_time, is_deleted, updated_by, updated_time, invoice_date, invoice_number, invoice_type,
-                      company_id, vendor_client_id)
+                      company_id, vendor_client_id, status)
 values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', '2021-01-05', 23 , 'PURCHASE',
-         1, 1);
+         1, 1, 'ACTIVE');
