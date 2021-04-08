@@ -69,8 +69,8 @@
                                                                 Delete
                                                             </a>
                                                         </div>
-                                                            <a th:case="Closed" class="btn btn-neutral btn-fill">
-                                                                Print Invoice
+                                                            <a th:case="Closed" th:href="@{/invoice/export/{id}(id=${purchaseInvoice.invoiceNumber})}" class="btn btn-neutral btn-fill">
+                                                                Export to PDF
                                                             </a>
                                                     </td>
                                                 </tr>

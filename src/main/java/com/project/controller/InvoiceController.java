@@ -4,6 +4,7 @@ import com.project.dto.InvoiceDto;
 import com.project.dto.InvoiceProductDto;
 import com.project.dto.UserDto;
 import com.project.exception.AccountingProjectException;
+import com.project.pdfExporter.InvoicePDFExporter;
 import com.project.repository.InvoiceRepository;
 import com.project.service.InvoiceProductService;
 import com.project.service.InvoiceService;
@@ -15,6 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/invoice")
@@ -84,6 +89,20 @@ public class InvoiceController {
     public String approveInvoice(@PathVariable("id") String id) throws AccountingProjectException {
         invoiceService.approveInvoice(invoiceService.findByInvoiceNumber(id));
         return "redirect:/invoice/purchaseInvoice";
+    }
+
+    @GetMapping("/export/{id}")
+    public void exportToPDF(@PathVariable("id") String id, HttpServletResponse response) throws IOException {
+        response.setContentType("Purchase Invoice");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Purchase Invoice.pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<InvoiceProductDto> listAll = invoiceProductService.findAllByInvoiceNumber(id);
+
+        InvoicePDFExporter exporter = new InvoicePDFExporter();
+        exporter.export(response);
+
     }
 
 }
