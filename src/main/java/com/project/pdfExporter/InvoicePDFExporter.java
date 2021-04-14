@@ -250,6 +250,7 @@ public class InvoicePDFExporter {
         cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Thank you for your business!", 395, 30, 0);
 
 
+        //end
         cb.endText();
         cb.sanityCheck();
         document.close();
