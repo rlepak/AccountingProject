@@ -100,7 +100,7 @@ public class InvoiceController {
 
         List<InvoiceProductDto> listAll = invoiceProductService.findAllByInvoiceNumber(id);
 
-        InvoicePDFExporter exporter = new InvoicePDFExporter();
+        InvoicePDFExporter exporter = new InvoicePDFExporter(listAll);
         exporter.export(response);
 
     }
