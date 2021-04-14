@@ -102,7 +102,7 @@ public class InvoiceController {
 
         InvoicePDFExporter exporter = new InvoicePDFExporter(listAll);
         exporter.export(response);
-        //git hub test
+    
     }
 
 }
