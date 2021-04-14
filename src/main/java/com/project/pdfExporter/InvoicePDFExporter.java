@@ -1,5 +1,6 @@
 package com.project.pdfExporter;
 
+
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
@@ -7,28 +8,27 @@ import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.*;
 import com.lowagie.text.pdf.draw.LineSeparator;
 import com.project.dto.InvoiceProductDto;
-import com.project.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
-import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class InvoicePDFExporter {
 
-    @Autowired
-    private ProductService productService;
+    private List<InvoiceProductDto> list = new ArrayList<>();
 
+    public InvoicePDFExporter(List<InvoiceProductDto> invoiceList) {
+        this.list = invoiceList;
+    }
 
-    public void export(HttpServletResponse response) throws IOException {
+    public void export(HttpServletResponse response) throws IOException, IOException {
 
 
         Document document = new Document(PageSize.A4);
@@ -41,7 +41,7 @@ public class InvoicePDFExporter {
 
 
         Image image = Image.getInstance("/Users/ruslan/Desktop/companyLogo.png");
-        cb.addImage(image, 160, 0, 0, 40,40,780);
+        cb.addImage(image, 160, 0, 0, 40, 40, 780);
 
         //company Name
         cb.setFontAndSize(BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 12);
@@ -58,28 +58,27 @@ public class InvoicePDFExporter {
         //bar code
         Barcode39 code39 = new Barcode39();
         Random random = new Random();
-        code39.setCode(String.valueOf(random.nextInt(1000000)+1000000000));
+        code39.setCode(String.valueOf(random.nextInt(1000000) + 1000000000));
         code39.setStartStopText(false);
         Image image39 = code39.createImageWithBarcode(cb, Color.BLACK, Color.WHITE);
-        cb.addImage(image39, 120, 0, 0, 30,420,670);
+        cb.addImage(image39, 120, 0, 0, 30, 420, 670);
 
 
         //vendor Name
         cb.setFontAndSize(BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 12);
-        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Vendor Name", 40, 650, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, list.get(0).getInvoice().getVendorClient().getCompanyName(), 40, 650, 0);
 
         //vendor Body
         cb.setFontAndSize(BaseFont.createFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 10);
-        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Address", 40, 635, 0);
-        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "City and State", 40, 625, 0);
-        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "US", 40, 615, 0);
-        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Phone Number", 40, 605, 0);
-        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Email", 40, 594, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, list.get(0).getInvoice().getVendorClient().getAddress(), 40, 635, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, list.get(0).getInvoice().getVendorClient().getState() + ", " + list.get(0).getInvoice().getVendorClient().getZipCode(), 40, 625, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Phone: " + list.get(0).getInvoice().getVendorClient().getPhone(), 40, 615, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, list.get(0).getInvoice().getVendorClient().getEmail(), 40, 605, 0);
 
         LineSeparator lineSeparator = new LineSeparator();
         lineSeparator.setLineWidth(45);
         lineSeparator.setLineColor(Color.LIGHT_GRAY);
-        lineSeparator.drawLine(cb, 350,357,628);
+        lineSeparator.drawLine(cb, 350, 357, 628);
 
         //Invoice
         cb.setFontAndSize(BaseFont.createFont(BaseFont.HELVETICA_OBLIQUE, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 12);
@@ -103,58 +102,159 @@ public class InvoicePDFExporter {
 
         // separating line
         lineSeparator.setLineWidth(3);
-        lineSeparator.drawLine(cb, 40,555,550);
+        lineSeparator.drawLine(cb, 40, 555, 550);
 
         //Check / Money order
         cb.setFontAndSize(BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 10);
         cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Check / Money order", 40, 535, 0);
 
 
-//        Table table = new Table(4, 4);
-//        table.setBorder(1);
-//        table.setBorderColor(Color.LIGHT_GRAY);
-//        Cell cell = new Cell("header");
-
-
         Font f = FontFactory.getFont(FontFactory.HELVETICA, 8);
+        Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8);
 
-        Table table = new Table(2);
-        Phrase phrase = new Phrase("Hello World!", f);
-        PdfPCell cell = new PdfPCell(phrase);
+        PdfPTable table = new PdfPTable(5);
+
+        float[] outer = {15, 300, 40, 40, 40};
+        table.setWidths(outer);
+
+        PdfPCell cell;
+
+
+        cell = new PdfPCell(new Paragraph("#", headerFont));
+        cell.setBackgroundColor(Color.LIGHT_GRAY);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setVerticalAlignment(Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cell.setBorderColor(Color.GRAY);
+        table.addCell(cell);
+
+        cell = new PdfPCell(new Paragraph("Product", headerFont));
+        cell.setBackgroundColor(Color.LIGHT_GRAY);
+        cell.setBorderColor(Color.GRAY);
+        table.addCell(cell);
 
 
-//        table.addCell(new Paragraph("name:", f));
-//        table.addCell(new Paragraph("Bruno Lowagie", f));
-//        table.addCell(new Paragraph("date of birth:", f));
-//        table.addCell(new Paragraph("June 10th, 1970", f));
-//        table.addCell(new Paragraph("Study Program:", f));
-//        table.addCell(new Paragraph("master in civil engineering", f));
-//        table.addCell(new Paragraph("option:", f));
-//        table.addCell(new Paragraph("architecture", f));
+        cell = new PdfPCell(new Paragraph("Price", headerFont));
+        cell.setBackgroundColor(Color.LIGHT_GRAY);
+        cell.setBorderColor(Color.GRAY);
+        table.addCell(cell);
+
+        cell = new PdfPCell(new Paragraph("Quantity", headerFont));
+        cell.setBackgroundColor(Color.LIGHT_GRAY);
+        cell.setBorderColor(Color.GRAY);
+        table.addCell(cell);
+
+        cell = new PdfPCell(new Paragraph("Total", headerFont));
+        cell.setBackgroundColor(Color.LIGHT_GRAY);
+        cell.setBorderColor(Color.GRAY);
+        table.addCell(cell);
 
 
-        document.add(table);
+        table.setTotalWidth(515);
 
-//        cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, text + " Right", 250, 650, 0);
-//        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, text + " Left", 250, 600, 0);
-//
-//        // we draw some text on a certain position
-//        cb.setTextMatrix(100, 400);
-//        cb.showText("Text at position 100,400.");
-//
-//        // we draw some rotated text on a certain position
-//        cb.setTextMatrix(0, 1, -1, 0, 100, 300);
-//        cb.showText("Text at position 100,300, rotated 90 degrees.");
-//
-//        // we draw some mirrored, rotated text on a certain position
-//        cb.setTextMatrix(0, 1, 1, 0, 200, 200);
-//        cb.showText("Text at position 200,200, mirrored and rotated 90 degrees.");
-//
+        double quantity = 0;
+        double amount = 0;
+
+        double totalAmount = 0;
+        double totalQuantity = 0;
+
+
+        for (int i = 0; i < list.size(); i++) {
+
+            cell = new PdfPCell(new Paragraph(String.valueOf(i + 1), f));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setBorderColor(Color.GRAY);
+            cell.setFixedHeight(20);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Paragraph(list.get(i).getProduct().getName() + "\n" + list.get(i).getProduct().getDescription(), f));
+            cell.setBorderColor(Color.GRAY);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Paragraph(String.valueOf(list.get(i).getUnitPrice()), f));
+            cell.setBorderColor(Color.GRAY);
+            table.addCell(cell);
+
+            quantity = list.get(i).getQuantity();
+            cell = new PdfPCell(new Paragraph(String.valueOf(quantity), f));
+            totalQuantity += quantity;
+            cell.setBorderColor(Color.GRAY);
+            table.addCell(cell);
+
+            amount = list.get(i).getQuantity() * list.get(i).getUnitPrice();
+            cell = new PdfPCell(new Paragraph(String.valueOf(amount), f));
+            totalAmount += amount;
+            cell.setBorderColor(Color.GRAY);
+            table.addCell(cell);
+
+        }
+
+        table.writeSelectedRows(0, list.size() + 5, 40, 520, cb);
+
+        int endOfMainTableAlignment = 520 - (int) table.getTotalHeight();
+
+        PdfPTable resultTable = new PdfPTable(2);
+        float[] resultTableWidth = {53.3F, 26.7F};
+        resultTable.setWidths(resultTableWidth);
+        resultTable.setTotalWidth(142);
+
+        String[] secondTableKeys = {"Total Quantity", "Subtotal", "Tax", "Grand Total"};
+        String[] secondTableValues = {String.valueOf(totalQuantity), String.valueOf(totalAmount),
+                String.valueOf(totalAmount * 0.09), String.valueOf(totalAmount + totalAmount * 0.09)};
+
+        for (int i = 0; i < secondTableKeys.length; i++) {
+
+            if (i != secondTableKeys.length - 1) {
+                cell = new PdfPCell(new Paragraph(secondTableKeys[i], headerFont));
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setBorderColor(Color.GRAY);
+                cell.setFixedHeight(20);
+                resultTable.addCell(cell);
+
+                cell = new PdfPCell(new Paragraph(secondTableValues[i], headerFont));
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setBorderColor(Color.GRAY);
+                resultTable.addCell(cell);
+            } else {
+                cell = new PdfPCell(new Paragraph(secondTableKeys[i], headerFont));
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setBorderColor(Color.GRAY);
+                cell.setBackgroundColor(Color.LIGHT_GRAY);
+                cell.setFixedHeight(20);
+                resultTable.addCell(cell);
+
+                cell = new PdfPCell(new Paragraph(secondTableValues[i], headerFont));
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setBorderColor(Color.GRAY);
+                cell.setBackgroundColor(Color.LIGHT_GRAY);
+                resultTable.addCell(cell);
+            }
+        }
+
+
+        resultTable.writeSelectedRows(0, 4, 413, endOfMainTableAlignment, cb);
+
+        int endOfMSecondTableAlignment = endOfMainTableAlignment - (int) resultTable.getTotalHeight();
+
+        // separating line
+        lineSeparator.setLineWidth(3);
+        lineSeparator.drawLine(cb, 40, 555, endOfMSecondTableAlignment - 30);
+
+
+        //vendor Name
+        cb.setFontAndSize(BaseFont.createFont(BaseFont.TIMES_ITALIC, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 14);
+        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Thank you for your business!", 395, 30, 0);
+
+
         cb.endText();
         cb.sanityCheck();
         document.close();
+
+
     }
 
 
