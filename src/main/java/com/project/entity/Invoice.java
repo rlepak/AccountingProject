@@ -21,7 +21,6 @@ public class Invoice extends BaseEntity {
 
     private String invoiceNumber;
 
-
     @Enumerated(EnumType.STRING)
     private InvoiceType invoiceType;
 
@@ -36,6 +35,6 @@ public class Invoice extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY)
     private Set<InvoiceProduct> invoiceProducts = new HashSet<>();
 }

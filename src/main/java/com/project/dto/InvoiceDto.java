@@ -1,11 +1,14 @@
 package com.project.dto;
 
 import com.project.entity.Company;
+import com.project.enums.InvoiceType;
 import com.project.enums.Status;
+import com.project.repository.InvoiceProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -15,6 +18,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class InvoiceDto {
+
 
     private long id;
 
@@ -27,9 +31,9 @@ public class InvoiceDto {
 
     private double cost;
 
-    private double tax = 0.9;
+    private double tax = 0.09;
 
-    private double total=cost*tax;
+    private double total;
 
     private InvoiceProductDto invoiceProductDto;
 
@@ -39,7 +43,7 @@ public class InvoiceDto {
 
     private Status status;
 
-
+    private InvoiceType invoiceType;
 
 
 

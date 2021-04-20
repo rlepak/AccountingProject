@@ -1,30 +1,30 @@
 package com.project.pdfExporter;
 
-
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
-import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.*;
 import com.lowagie.text.pdf.draw.LineSeparator;
 import com.project.dto.InvoiceProductDto;
-
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class InvoicePDFExporter {
-
+@NoArgsConstructor
+@Getter
+@Setter
+public class SaleInvoicePDFExporter {
     private List<InvoiceProductDto> list = new ArrayList<>();
 
-    public InvoicePDFExporter(List<InvoiceProductDto> invoiceList) {
+    public SaleInvoicePDFExporter(List<InvoiceProductDto> invoiceList) {
         this.list = invoiceList;
     }
 
@@ -93,7 +93,7 @@ public class InvoicePDFExporter {
 
         //Order Type, Order Date body
         cb.setFontAndSize(BaseFont.createFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 10);
-        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "PURCHASE", 370, 610, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "SALE", 370, 610, 0);
         cb.showTextAligned(PdfContentByte.ALIGN_LEFT, LocalDate.now().toString(), 450, 610, 0);
 
         //Payment Method
@@ -109,7 +109,7 @@ public class InvoicePDFExporter {
         cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Check / Money order", 40, 535, 0);
 
 
-        Font f = FontFactory.getFont(FontFactory.HELVETICA, 8);
+        com.lowagie.text.Font f = FontFactory.getFont(FontFactory.HELVETICA, 8);
         Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8);
 
         PdfPTable table = new PdfPTable(5);
@@ -198,7 +198,7 @@ public class InvoicePDFExporter {
         resultTable.setWidths(resultTableWidth);
         resultTable.setTotalWidth(142);
 
-        String[] secondTableKeys = {"Total Quantity", "Subtotal", "Tax", "Grand Total"};
+        String[] secondTableKeys = {"Total Quantity", "Subtotal", "Tax", "Total due"};
         String[] secondTableValues = {String.valueOf(totalQuantity), String.valueOf(totalAmount),
                 String.valueOf(totalAmount * 0.09), String.valueOf(totalAmount + totalAmount * 0.09)};
 
@@ -257,6 +257,4 @@ public class InvoicePDFExporter {
 
 
     }
-
-
 }

@@ -18,7 +18,6 @@ public class InvoiceProduct extends BaseEntity{
     private double quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "invoice_number")
     private Invoice invoice;
 
     @ManyToOne(fetch = FetchType.LAZY)

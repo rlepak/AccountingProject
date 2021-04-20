@@ -22,13 +22,13 @@
                     <!-- Content start here -->
                     <div class="col-md-12">
                         <div class="card">
-                            <form id="registerFormValidation" th:action="@{/invoice/addItem}"
+                            <form id="registerFormValidation" th:action="@{/invoice/addItemToSaleInvoice}"
                                   method="post"
                                   th:object="${invoiceDto}"
                             >
                                 <div class="card-content">
-                                    <a class="btn btn-primary" type="button" th:href="@{/invoice/purchaseInvoice}"><i
-                                            class="ti-list"> </i> Purchase Invoice List
+                                    <a class="btn btn-primary" type="button" th:href="@{/invoice/saleInvoice}"><i
+                                            class="ti-list"> </i> Sale Invoice List
                                     </a>
                                     <br>
                                     <h4 class="card-title">New Invoice Successfully created, please add items</h4>
@@ -139,7 +139,7 @@
                                         <td th:text="${productInvoice.unitPrice}"></td>
                                         <td th:text="${productInvoice.quantity}"></td>
                                         <td th:text="${productInvoice.unitPrice*productInvoice.quantity}"></td>
-                                        <td><a th:href="@{/invoice/delete/{id}(id=${productInvoice.id})}"
+                                        <td><a th:href="@{/invoice/deletePurchaseInvoice/{id}(id=${productInvoice.id})}"
                                                class="btn btn-simple btn-danger btn-icon table-action edit ti-trash"></a>
                                         </td>
 
@@ -148,8 +148,8 @@
                                     </tbody>
                                 </table>
                                 <div class="card-footer text-right">
-                                    <a th:href="@{/invoice/purchaseInvoice}" class="btn btn-success btn-fill">Done</a>
-                                    <a th:href="@{/invoice/delete/{id}(id=${invoiceDto.invoiceNumber})}" class="btn btn-danger btn-fill">Delete Invoice</a>
+                                    <a th:href="@{/invoice/saleInvoice}" class="btn btn-success btn-fill">Done</a>
+                                    <a th:href="@{/invoice/deleteSaleInvoice/{id}(id=${invoiceDto.invoiceNumber})}" class="btn btn-danger btn-fill">Delete Invoice</a>
                                 </div>
                             </div>
                         </div>

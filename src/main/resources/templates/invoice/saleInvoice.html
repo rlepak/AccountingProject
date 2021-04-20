@@ -21,7 +21,7 @@
                 <div class="row">
 
                     <!-- Content start here -->
-                    <div class="content" th:object="${purchaseInvoices}">
+                    <div class="content" th:object="${saleInvoices}">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
@@ -31,9 +31,9 @@
                                                 <!--Here you can write extra buttons/actions for the toolbar-->
                                             </div>
                                             <div class="d-grid gap-2 col-6 mx-auto">
-                                                <a th:href="@{/invoice/addPurchaseInvoice}">
+                                                <a th:href="@{/invoice/addSaleInvoice}">
                                                     <button class="btn btn-primary" type="button" th:href="login">+
-                                                        Create Purchase Invoice
+                                                        Create Sale Invoice
                                                     </button>
                                                 </a>
                                             </div>
@@ -42,7 +42,7 @@
                                                 <thead>
                                                 <th data-field="invoiceNo" class="text-center">Invoice No</th>
                                                 <th data-field="invoiceDate" data-sortable="true">Invoice Date</th>
-                                                <th data-field="vendor" data-sortable="true">Vendor</th>
+                                                <th data-field="vendor" data-sortable="true">Client</th>
                                                 <th data-field="cost" data-sortable="true">Cost</th>
                                                 <th data-field="tax">Tax</th>
                                                 <th data-field="total">Total</th>
@@ -50,28 +50,28 @@
                                                 <th></th>
                                                 </thead>
                                                 <tbody>
-                                                <tr th:each="purchaseInvoice : ${purchaseInvoices}">
-                                                    <td th:text="${purchaseInvoice.invoiceNumber}"></td>
-                                                    <td th:text="${purchaseInvoice.invoiceDate}"></td>
-                                                    <td th:text="${purchaseInvoice.vendorClient.companyName}"></td>
-                                                    <td th:text="${purchaseInvoice.cost}"></td>
-                                                    <td th:text="${purchaseInvoice.tax}"></td>
-                                                    <td th:text="${purchaseInvoice.total}"></td>
-                                                    <td><a th:href="@{/invoice/addItemToPurchaseInvoice/{id}(id=${purchaseInvoice.invoiceNumber})}"
+                                                <tr th:each="saleInvoice : ${saleInvoices}">
+                                                    <td th:text="${saleInvoice.invoiceNumber}"></td>
+                                                    <td th:text="${saleInvoice.invoiceDate}"></td>
+                                                    <td th:text="${saleInvoice.vendorClient.companyName}"></td>
+                                                    <td th:text="${saleInvoice.cost}"></td>
+                                                    <td th:text="${saleInvoice.tax}"></td>
+                                                    <td th:text="${saleInvoice.total}"></td>
+                                                    <td><a th:href="@{/invoice/addItemToSaleInvoice/{id}(id=${saleInvoice.invoiceNumber})}"
                                                            class="btn btn-simple btn-warning btn-icon table-action edit ti-pencil-alt"></a>
                                                     </td>
-                                                    <td th:switch="${purchaseInvoice.status.value}">
+                                                    <td th:switch="${saleInvoice.status.value}">
                                                         <div th:case="Active">
-                                                            <a th:href="@{/invoice/confirmPurchaseInvoice/{id}(id=${purchaseInvoice.invoiceNumber})}" class="btn btn-success btn-fill">
+                                                            <a th:href="@{/invoice/confirmSaleInvoice/{id}(id=${saleInvoice.invoiceNumber})}" class="btn btn-success btn-fill">
                                                                 Approve
                                                             </a>
-                                                            <a th:href="@{/invoice/deletePurchaseInvoice/{id}(id=${purchaseInvoice.invoiceNumber})}" class="btn btn-danger btn-fill">
+                                                            <a th:href="@{/invoice/deleteSaleInvoice/{id}(id=${saleInvoice.invoiceNumber})}" class="btn btn-danger btn-fill">
                                                                 Delete
                                                             </a>
                                                         </div>
-                                                            <a th:case="Closed" th:href="@{/invoice/exportPurchaseInvoice/{id}(id=${purchaseInvoice.invoiceNumber})}" class="btn btn-neutral btn-fill">
-                                                                Export to PDF
-                                                            </a>
+                                                        <a th:case="Closed" th:href="@{/invoice/exportSaleInvoice/{id}(id=${saleInvoice.invoiceNumber})}" class="btn btn-neutral btn-fill">
+                                                            Export to PDF
+                                                        </a>
                                                     </td>
                                                 </tr>
                                                 </tbody>

@@ -2,9 +2,8 @@ package com.project.controller;
 
 import com.project.dto.InvoiceDto;
 import com.project.dto.InvoiceProductDto;
-import com.project.dto.UserDto;
 import com.project.exception.AccountingProjectException;
-import com.project.pdfExporter.InvoicePDFExporter;
+import com.project.pdfExporter.PurchaseInvoicePDFExporter;
 import com.project.repository.InvoiceRepository;
 import com.project.service.InvoiceProductService;
 import com.project.service.InvoiceService;
@@ -23,7 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/invoice")
-public class InvoiceController {
+public class PurchaseInvoiceController {
 
     //to keep invoice number
     String URI;
@@ -34,7 +33,7 @@ public class InvoiceController {
     private InvoiceProductService invoiceProductService;
     private InvoiceRepository invoiceRepository;
 
-    public InvoiceController(InvoiceService invoiceService, ProductService productService, VendorClientService vendorClientService, InvoiceProductService invoiceProductService, InvoiceRepository invoiceRepository) {
+    public PurchaseInvoiceController(InvoiceService invoiceService, ProductService productService, VendorClientService vendorClientService, InvoiceProductService invoiceProductService, InvoiceRepository invoiceRepository) {
         this.invoiceService = invoiceService;
         this.productService = productService;
         this.vendorClientService = vendorClientService;
@@ -44,65 +43,65 @@ public class InvoiceController {
 
     @GetMapping("/purchaseInvoice")
     public String allPurchaseInvoices(Model model){
-        model.addAttribute("purchaseInvoices", invoiceService.listAllInvoices());
+        model.addAttribute("purchaseInvoices", invoiceService.listAllPurchaseInvoices());
         return "/invoice/purchaseInvoice";
     }
 
-    @GetMapping("/addInvoice")
-    public String addInvoice(InvoiceDto invoiceDto, Model model) {
+    @GetMapping("/addPurchaseInvoice")
+    public String addPurchaseInvoice(InvoiceDto invoiceDto, Model model) {
         model.addAttribute("vendors", vendorClientService.listAllVendorClient());
-        return "/invoice/addInvoice";
+        return "invoice/addPurchaseInvoice";
     }
 
-    @PostMapping("/addInvoice")
-    public String createInvoice(InvoiceDto invoiceDto, Model model) throws AccountingProjectException {
+    @PostMapping("/addPurchaseInvoice")
+    public String createPurchaseInvoice(InvoiceDto invoiceDto, Model model) throws AccountingProjectException {
         model.addAttribute("invoiceDto", new InvoiceDto());
         invoiceService.savePurchaseInvoice(invoiceDto);
-        return "redirect:/invoice/addItem/" + invoiceDto.getInvoiceNumber();
+        return "redirect:/invoice/addItemToPurchaseInvoice/" + invoiceDto.getInvoiceNumber();
     }
 
-    @GetMapping("/addItem/{invoiceNo}")
-    public String addItem(@PathVariable("invoiceNo") String invoiceNo, Model model) throws AccountingProjectException {
+    @GetMapping("/addItemToPurchaseInvoice/{invoiceNo}")
+    public String addItemToPurchaseInvoice(@PathVariable("invoiceNo") String invoiceNo, Model model) throws AccountingProjectException {
         model.addAttribute("invoiceProduct", new InvoiceProductDto());
-        model.addAttribute("invoiceProducts", invoiceProductService.findAllByInvoiceNumber(invoiceNo));
+        model.addAttribute("invoiceProducts", invoiceProductService.findPurchaseSaleInvoiceByInvoiceNumber(invoiceNo));
         model.addAttribute("invoiceDto", invoiceService.findByInvoiceNumber(invoiceNo));
         model.addAttribute("products", productService.listAllProducts());
         URI = invoiceNo;
-        return "/invoice/addItem";
+        return "invoice/addItemToPurchaseInvoice";
     }
 
-    @PostMapping("/addItem")
-    public String createItem(InvoiceProductDto invoiceProductDto, Model model) throws AccountingProjectException {
+    @PostMapping("/addItemToPurchaseInvoice")
+    public String createPurchaseItem(InvoiceProductDto invoiceProductDto, Model model) throws AccountingProjectException {
         model.addAttribute("productInvoice", new InvoiceProductDto());
         invoiceProductDto.setInvoice(invoiceRepository.findByInvoiceNumber(URI));
-        invoiceProductService.save(invoiceProductDto);
-        return "redirect:/invoice/addItem/" + URI;
+        invoiceProductService.savePurchaseSaleInvoice(invoiceProductDto);
+        return "redirect:/invoice/addItemToPurchaseInvoice/" + URI;
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteInvoice(@PathVariable("id") String id) throws AccountingProjectException {
+    @GetMapping("/deletePurchaseInvoice/{id}")
+    public String deletePurchaseInvoice(@PathVariable("id") String id) throws AccountingProjectException {
         invoiceService.deleteByInvoiceNumber(id);
         return "redirect:/invoice/purchaseInvoice";
     }
 
-    @GetMapping("/confirm/{id}")
-    public String approveInvoice(@PathVariable("id") String id) throws AccountingProjectException {
+    @GetMapping("/confirmPurchaseInvoice/{id}")
+    public String approvePurchaseInvoice(@PathVariable("id") String id) throws AccountingProjectException {
         invoiceService.approveInvoice(invoiceService.findByInvoiceNumber(id));
         return "redirect:/invoice/purchaseInvoice";
     }
 
-    @GetMapping("/export/{id}")
-    public void exportToPDF(@PathVariable("id") String id, HttpServletResponse response) throws IOException {
+    @GetMapping("/exportPurchaseInvoice/{id}")
+    public void exportToPDFPurchaseInvoice(@PathVariable("id") String id, HttpServletResponse response) throws IOException {
         response.setContentType("Purchase Invoice");
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=Purchase Invoice.pdf";
         response.setHeader(headerKey, headerValue);
 
-        List<InvoiceProductDto> listAll = invoiceProductService.findAllByInvoiceNumber(id);
+        List<InvoiceProductDto> listAll = invoiceProductService.findPurchaseSaleInvoiceByInvoiceNumber(id);
 
-        InvoicePDFExporter exporter = new InvoicePDFExporter(listAll);
+        PurchaseInvoicePDFExporter exporter = new PurchaseInvoicePDFExporter(listAll);
         exporter.export(response);
-    
+
     }
 
 }

@@ -33,16 +33,27 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public List<InvoiceDto> listAllInvoices() {
-        List<Invoice> invoiceList = invoiceRepository.findAll();
+    public List<InvoiceDto> listAllSaleInvoices() {
+        List<Invoice> invoiceList = invoiceRepository.findAllByInvoiceType(InvoiceType.SALE);
         return invoiceList.stream().map(invoice -> mapperUtil.convert(invoice, new InvoiceDto())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<InvoiceDto> listAllPurchaseInvoices() {
+        List<Invoice> invoiceList = invoiceRepository.findAllByInvoiceType(InvoiceType.PURCHASE);
+        return invoiceList.stream().map(invoice -> {
+            InvoiceDto invoiceDto = mapperUtil.convert(invoice, new InvoiceDto());
+            invoiceDto.setCost(invoiceProductRepository.totalSumByInvoiceNumber(invoice.getId()));
+            invoiceDto.setTotal(invoiceProductRepository.totalSumByInvoiceNumber(invoice.getId()) + invoiceProductRepository.totalSumByInvoiceNumber(invoice.getId()) * 0.09);
+            return invoiceDto;
+        }).collect(Collectors.toList());
     }
 
     @Override
     public InvoiceDto savePurchaseInvoice(InvoiceDto invoiceDto) throws AccountingProjectException {
         Invoice invoice = invoiceRepository.findById(invoiceDto.getId()).orElse(null);
-        if(invoice!=null){
-            throw  new AccountingProjectException("This invoice exist");
+        if (invoice != null) {
+            throw new AccountingProjectException("This invoice exist");
         }
         Invoice invoiceObject = mapperUtil.convert(invoiceDto, new Invoice());
         invoiceObject.setInvoiceType(InvoiceType.PURCHASE);
@@ -51,10 +62,24 @@ public class InvoiceServiceImpl implements InvoiceService {
         return mapperUtil.convert(savedInvoice, new InvoiceDto());
     }
 
+    //TODO set Company name needed
+    @Override
+    public InvoiceDto saveSaleInvoice(InvoiceDto invoiceDto) throws AccountingProjectException {
+        Invoice invoice = invoiceRepository.findById(invoiceDto.getId()).orElse(null);
+        if (invoice != null) {
+            throw new AccountingProjectException("This invoice exist");
+        }
+        Invoice invoiceObject = mapperUtil.convert(invoiceDto, new Invoice());
+        invoiceObject.setInvoiceType(InvoiceType.SALE);
+        invoiceObject.setStatus(Status.ACTIVE);
+        Invoice savedInvoice = invoiceRepository.save(invoiceObject);
+        return mapperUtil.convert(savedInvoice, new InvoiceDto());
+    }
+
     @Override
     public InvoiceDto findById(Long id) throws AccountingProjectException {
         Invoice invoice = invoiceRepository.findById(id).orElse(null);
-        if (invoice==null){
+        if (invoice == null) {
             throw new AccountingProjectException("Invoice with " + id + " not exist");
         }
         return mapperUtil.convert(invoice, new InvoiceDto());
@@ -83,7 +108,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
 
         List<InvoiceProduct> invoiceProductList = invoiceProductRepository.findAllByInvoiceInvoiceNumber(invoiceNumber);
-        invoiceProductList.forEach(i->i.setIsDeleted(true));
+        invoiceProductList.forEach(i -> i.setIsDeleted(true));
         invoice.setIsDeleted(true);
         invoiceRepository.save(invoice);
     }
