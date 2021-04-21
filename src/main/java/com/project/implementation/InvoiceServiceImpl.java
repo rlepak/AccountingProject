@@ -35,6 +35,16 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public List<InvoiceDto> listAllSaleInvoices() {
         List<Invoice> invoiceList = invoiceRepository.findAllByInvoiceType(InvoiceType.SALE);
+        return invoiceList.stream().map(invoice -> {
+            InvoiceDto invoiceDto = mapperUtil.convert(invoice, new InvoiceDto());
+            invoiceDto.setCost(invoiceProductRepository.totalSumByInvoiceNumber(invoice.getId()));
+            invoiceDto.setTotal(invoiceProductRepository.totalSumByInvoiceNumber(invoice.getId()) + invoiceProductRepository.totalSumByInvoiceNumber(invoice.getId()) * 0.09);
+            return invoiceDto;
+        }).collect(Collectors.toList());    }
+
+    @Override
+    public List<InvoiceDto> listAllInvoices() {
+        List<Invoice> invoiceList = invoiceRepository.findAll();
         return invoiceList.stream().map(invoice -> mapperUtil.convert(invoice, new InvoiceDto())).collect(Collectors.toList());
     }
 

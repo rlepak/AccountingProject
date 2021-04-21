@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/cssFragment :: cssFragments"></div>
+    <title>Log in - Premier Accounting</title>
+</head>
+
+
+<body>
+<div class="wrapper">
+
+    <div th:replace="/fragments/leftSidebar :: left-sidebar"></div>
+
+    <div class="main-panel">
+
+        <div th:replace="/fragments/header :: header"></div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Content start here -->
+                    <div class="content" th:object="${products}">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="d-grid gap-2 col-3 mx-auto">
+                                                <a>
+                                                    <button class="btn btn-primary" type="button" >
+                                                        CSV
+                                                    </button>
+                                                </a>
+                                                <a>
+                                                    <button class="btn btn-primary" type="button" >
+                                                        PDF
+                                                    </button>
+                                                </a>
+                                                <a>
+                                                    <button class="btn btn-primary" type="button" >
+                                                        PRINT
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <table id="bootstrap-table" class="table">
+                                                <thead>
+                                                <th data-field="product" data-sortable="true">Product</th>
+                                                <th data-field="category" data-sortable="true">Category</th>
+                                                <th data-field="quantity" data-sortable="true">Quantity</th>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="product : ${products}">
+                                                    <td th:text="${product.description}"></td>
+                                                    <td th:text="${product.category.description}"></td>
+                                                    <td th:text="${product.quantity}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div><!--  end card  -->
+                                </div> <!-- end col-md-12 -->
+                            </div> <!-- end row -->
+                        </div>
+                    </div>
+
+                    <!-- Content end here -->
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div th:replace="/fragments/footer :: footer"></div>
+        </footer>
+    </div>
+</div>
+</body>
+<div th:replace="/fragments/jsFragment :: jsFragments"></div>
+</html>

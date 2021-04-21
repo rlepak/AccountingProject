@@ -37,4 +37,6 @@ public class Invoice extends BaseEntity {
 
     @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY)
     private Set<InvoiceProduct> invoiceProducts = new HashSet<>();
+
+
 }
