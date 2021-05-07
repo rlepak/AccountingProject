@@ -1,7 +1,8 @@
 insert into role (id, description, enabled)
-values (1, 'Admin', true),
-       (2, 'Manager', true),
-       (3, 'Employee', true);
+values (1, 'ROOT', true),
+       (2, 'ADMIN', true),
+       (3, 'Manager', true),
+       (4, 'Employee', true);
 
 
 insert into state (code, name)
@@ -133,15 +134,16 @@ values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'LG', '110 Ma
         'James Smith', 'Nokia@gmail.com', '2021-01-05 00:00:00', 'ACTIVE', '770-032-2343');
 
 
-
 insert into users(created_by, created_time, is_deleted, updated_by, updated_time, email, first_name, last_name,
                   password, phone, status, company_id, role_id)
-values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'user1@google.com', 'Nick', 'Smith', 'abc1',
+values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'root@google.com', 'Nick', 'Smith', '$2a$10$RJ0uRGMHEhDDkQx5iQbFwuumy6HbNWqQLjNWTCcr4L/dEhoKvPMHe',
         '7739823232', 'ACTIVE', 1, 1),
-       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'user2@google.com', 'Bob', 'Smith', 'abc1',
-        '7739823232', 'ACTIVE', 3, 1),
-       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'user3@google.com', 'James', 'Great', 'abc1',
-        '7739823232', 'ACTIVE', 2, 1);
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'admin@google.com', 'Bob', 'Smith', '$2a$10$nAB5j9G1c3JHgg7qzhiIXO7cqqr5oJ3LXRNQJKssDUwHXzDGUztNK',
+        '7739823232', 'ACTIVE', 3, 2),
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'manager@google.com', 'James', 'Great', '$2a$10$nAB5j9G1c3JHgg7qzhiIXO7cqqr5oJ3LXRNQJKssDUwHXzDGUztNK',
+        '7739823232', 'ACTIVE', 2, 3),
+        (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'employee@google.com', 'Will', 'Adams', '$2a$10$nAB5j9G1c3JHgg7qzhiIXO7cqqr5oJ3LXRNQJKssDUwHXzDGUztNK',
+        '7739823232', 'ACTIVE', 2, 4);
 
 insert into vendor_client (created_by, created_time, is_deleted, updated_by, updated_time, address, company_name, email,
                            phone, status, type, zip_code, company_id, state)
@@ -153,16 +155,16 @@ values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', '100 Main', '
         '35643654', 'ACTIVE', 'VENDOR', '60132', 3, 'IL');
 
 insert into category (created_by, created_time, is_deleted, updated_by, updated_time, description, status, company_id)
-values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Electronic', 'ACTIVE' , 3),
-       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Food', 'ACTIVE' , 2),
-       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Automotive', 'ACTIVE' , 3),
-       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Industrial Goods', 'ACTIVE' , 1),
-       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Furniture', 'ACTIVE' , 2),
-       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Home Improvement', 'ACTIVE' , 1);
+values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Electronic', 'ACTIVE', 3),
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Food', 'ACTIVE', 2),
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Automotive', 'ACTIVE', 3),
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Industrial Goods', 'ACTIVE', 1),
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Furniture', 'ACTIVE', 2),
+       (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Home Improvement', 'ACTIVE', 1);
 
 insert into product (created_by, created_time, is_deleted, updated_by, updated_time, description, low_limit_alert, name,
-                           price, quantity,  status, tax, unit, category_id, company_id)
-values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Smart TV', FALSE , 'TV',
+                     price, quantity, status, tax, unit, category_id, company_id)
+values (2, '2021-01-05 00:00:00', false, 2, '2021-01-05 00:00:00', 'Smart TV', FALSE, 'TV',
         123, 4, 'ACTIVE', 9.5, 'PIECE', 1, 1);
 
 

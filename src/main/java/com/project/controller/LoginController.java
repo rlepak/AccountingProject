@@ -2,6 +2,7 @@ package com.project.controller;
 
 import com.project.dto.CurrencyExchangeDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,8 @@ public class LoginController {
     }
 
     @RequestMapping("/index")
-    public String welcome(Model model){
+    public String welcome(Model model, Authentication authentication){
+        System.out.println(authentication.getName());
 //        CurrencyExchangeDto currencyExchangeDto = new CurrencyExchangeDto();
 //        model.addAttribute("currencyDto", currencyExchangeDto);
         return "index";

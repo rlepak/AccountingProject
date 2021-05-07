@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <div th:fragment="left-sidebar">
@@ -19,12 +20,12 @@
                 <div class="photo">
                     <img src="../../assets/img/faces/face-2.jpg"/>
                 </div>
-                <div class="info">
+                <div class="info" sec:authorize="isAuthenticated()">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
 	                        <span>
-								Diana Lepak,
+								[[${#request.userPrincipal.principal.fullName}]],
                                 <br>
-                                Root User
+                                [[${#request.remoteUser}]]
 		                        <b class="caret"></b>
 							</span>
                     </a>

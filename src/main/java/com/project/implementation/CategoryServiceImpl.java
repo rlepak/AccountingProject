@@ -7,12 +7,20 @@ import com.project.entity.Category;
 import com.project.entity.Company;
 import com.project.entity.Product;
 import com.project.entity.User;
+import com.project.entity.common.UserPrincipal;
 import com.project.exception.AccountingProjectException;
 import com.project.repository.CategoryRepository;
 import com.project.service.CategoryService;
+import com.project.service.SecurityService;
 import com.project.util.MapperUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
     private MapperUtil mapperUtil;
 
+
     public CategoryServiceImpl(CategoryRepository categoryRepository, MapperUtil mapperUtil) {
         this.categoryRepository = categoryRepository;
         this.mapperUtil = mapperUtil;
@@ -29,6 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDto> listAllCategories() {
+        System.out.println();
         List<Category> categoryList = categoryRepository.findAll();
         return categoryList.stream().map(category -> mapperUtil.convert(category, new CategoryDto())).collect(Collectors.toList());
     }
@@ -37,7 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto findById(Long id) throws AccountingProjectException {
 
         Category category = categoryRepository.findById(id).orElse(null);
-        if (category==null){
+        if (category == null) {
             throw new AccountingProjectException("Category with " + id + " not exist");
         }
         return mapperUtil.convert(category, new CategoryDto());
@@ -46,8 +56,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto save(CategoryDto categoryDto) throws AccountingProjectException {
         Category category = categoryRepository.findById(categoryDto.getId()).orElse(null);
-        if(category!=null){
-            throw  new AccountingProjectException("This category exist");
+        if (category != null) {
+            throw new AccountingProjectException("This category exist");
         }
         Category categoryObject = mapperUtil.convert(categoryDto, new Category());
         Category savedCategory = categoryRepository.save(categoryObject);

@@ -4,6 +4,7 @@ import com.project.dto.CategoryDto;
 import com.project.dto.CompanyDto;
 import com.project.dto.ProductDto;
 import com.project.entity.Category;
+import com.project.entity.common.UserPrincipal;
 import com.project.exception.AccountingProjectException;
 
 import java.util.List;
