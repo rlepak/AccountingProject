@@ -52,15 +52,15 @@ public class PurchaseInvoicePDFExporter {
 
         //company Name
         cb.setFontAndSize(BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 12);
-        cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, "Company Name", 550, 800, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, list.get(0).getInvoice().getCompany().getTitle(), 550, 800, 0);
 
         //company Body
         cb.setFontAndSize(BaseFont.createFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 10);
-        cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, "Address", 550, 785, 0);
-        cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, "City and State", 550, 775, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, list.get(0).getInvoice().getCompany().getAddress(), 550, 785, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, list.get(0).getInvoice().getCompany().getZip(), 550, 775, 0);
         cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, "US", 550, 765, 0);
-        cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, "Phone Number", 550, 755, 0);
-        cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, "Email", 550, 745, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, list.get(0).getInvoice().getCompany().getPhone(), 550, 755, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, list.get(0).getInvoice().getCompany().getEmail(), 550, 745, 0);
 
         //bar code
         Barcode39 code39 = new Barcode39();
@@ -91,7 +91,7 @@ public class PurchaseInvoicePDFExporter {
         cb.setFontAndSize(BaseFont.createFont(BaseFont.HELVETICA_OBLIQUE, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 12);
         cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Invoice #", 370, 640, 0);
         cb.setFontAndSize(BaseFont.createFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 12);
-        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "65345", 425, 640, 0);
+        cb.showTextAligned(PdfContentByte.ALIGN_LEFT, list.get(0).getInvoice().getInvoiceNumber(), 425, 640, 0);
 
         //Order Type, Order Date header
         cb.setFontAndSize(BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 10);

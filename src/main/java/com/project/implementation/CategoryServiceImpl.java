@@ -10,8 +10,11 @@ import com.project.entity.User;
 import com.project.entity.common.UserPrincipal;
 import com.project.exception.AccountingProjectException;
 import com.project.repository.CategoryRepository;
+import com.project.repository.CompanyRepository;
+import com.project.repository.UserRepository;
 import com.project.service.CategoryService;
 import com.project.service.SecurityService;
+import com.project.service.UserService;
 import com.project.util.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,16 +32,23 @@ public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
     private MapperUtil mapperUtil;
+    private CompanyRepository companyRepository;
 
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository, MapperUtil mapperUtil) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, MapperUtil mapperUtil, CompanyRepository companyRepository) {
         this.categoryRepository = categoryRepository;
         this.mapperUtil = mapperUtil;
+        this.companyRepository = companyRepository;
+    }
+
+    @Override
+    public List<CategoryDto> listAllCategoriesByCompanyId(Long id) {
+        List<Category> categoryList = categoryRepository.findAllByCompanyId(id);
+        return categoryList.stream().map(category -> mapperUtil.convert(category, new CategoryDto())).collect(Collectors.toList());
     }
 
     @Override
     public List<CategoryDto> listAllCategories() {
-        System.out.println();
         List<Category> categoryList = categoryRepository.findAll();
         return categoryList.stream().map(category -> mapperUtil.convert(category, new CategoryDto())).collect(Collectors.toList());
     }
@@ -54,12 +64,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto save(CategoryDto categoryDto) throws AccountingProjectException {
+    public CategoryDto save(CategoryDto categoryDto, Authentication authentication) throws AccountingProjectException {
         Category category = categoryRepository.findById(categoryDto.getId()).orElse(null);
         if (category != null) {
             throw new AccountingProjectException("This category exist");
         }
         Category categoryObject = mapperUtil.convert(categoryDto, new Category());
+        categoryObject.setCompany(companyRepository.findCompanyByUserEmail(authentication.getName()));
         Category savedCategory = categoryRepository.save(categoryObject);
         return mapperUtil.convert(savedCategory, new CategoryDto());
     }

@@ -1,5 +1,6 @@
 package com.project.entity.common;
 
+import com.project.entity.Company;
 import com.project.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -72,4 +73,6 @@ public class UserPrincipal implements UserDetails {
     public String getFullName(){
         return user.getFirstName() + " " + user.getLastName();
     }
+
+
 }

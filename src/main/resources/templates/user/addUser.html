@@ -130,16 +130,29 @@
                                     <fieldset>
                                         <div class="col-lg-8">
                                             <div class="row">
+<!--                                                <div class="col-md-6">-->
+<!--                                                    <label>-->
+<!--                                                        Company-->
+<!--                                                    </label>-->
+<!--                                                    <input class="form-control"-->
+<!--                                                           th:object="${companyInfo}"-->
+<!--                                                           th:field="*{company}"-->
+<!--                                                           type="text"-->
+<!--                                                           name="required3"-->
+<!--                                                           required="required"-->
+<!--                                                           th:value="${companyInfo.title}"-->
+<!--                                                           disabled-->
+<!--                                                    />-->
+<!--                                                </div>-->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>
                                                             Company
                                                         </label>
                                                         <select th:field="*{company}" class="form-control" required="required">
-                                                            <option th:value=" ''" th:text="Select"></option>
-                                                            <option th:each="company : ${companies}"
-                                                                    th:value="${company.id}"
-                                                                    th:text="${company.title}">
+                                                            <option
+                                                                    th:value="${companyDto.id}"
+                                                                    th:text="${companyDto.title}">
                                                             </option>
                                                         </select>
                                                     </div>

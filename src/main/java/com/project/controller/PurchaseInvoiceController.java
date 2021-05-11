@@ -9,6 +9,7 @@ import com.project.service.InvoiceProductService;
 import com.project.service.InvoiceService;
 import com.project.service.ProductService;
 import com.project.service.VendorClientService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,9 +55,9 @@ public class PurchaseInvoiceController {
     }
 
     @PostMapping("/addPurchaseInvoice")
-    public String createPurchaseInvoice(InvoiceDto invoiceDto, Model model) throws AccountingProjectException {
+    public String createPurchaseInvoice(InvoiceDto invoiceDto, Model model, Authentication authentication) throws AccountingProjectException {
         model.addAttribute("invoiceDto", new InvoiceDto());
-        invoiceService.savePurchaseInvoice(invoiceDto);
+        invoiceService.savePurchaseInvoice(invoiceDto, authentication);
         return "redirect:/invoice/addItemToPurchaseInvoice/" + invoiceDto.getInvoiceNumber();
     }
 

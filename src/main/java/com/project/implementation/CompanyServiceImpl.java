@@ -2,8 +2,10 @@ package com.project.implementation;
 
 import com.project.dto.CompanyDto;
 import com.project.entity.Company;
+import com.project.entity.User;
 import com.project.exception.AccountingProjectException;
 import com.project.repository.CompanyRepository;
+import com.project.repository.UserRepository;
 import com.project.service.CompanyService;
 import com.project.util.MapperUtil;
 import org.springframework.data.domain.Sort;
@@ -18,10 +20,19 @@ public class CompanyServiceImpl implements CompanyService {
 
     private CompanyRepository companyRepository;
     private MapperUtil mapperUtil;
+    private UserRepository userRepository;
 
-    public CompanyServiceImpl(CompanyRepository companyRepository, MapperUtil mapperUtil) {
+    public CompanyServiceImpl(CompanyRepository companyRepository, MapperUtil mapperUtil, UserRepository userRepository) {
         this.companyRepository = companyRepository;
         this.mapperUtil = mapperUtil;
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public CompanyDto findCompanyByUser(String username) {
+        User foundUser = userRepository.findByEmail(username);
+        Company foundCompany = companyRepository.findAllByUsers(foundUser);
+        return mapperUtil.convert(foundCompany, new CompanyDto());
     }
 
     @Override

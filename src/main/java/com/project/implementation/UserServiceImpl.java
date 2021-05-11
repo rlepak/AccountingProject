@@ -25,6 +25,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> listAllUsersByCompanyId(Long id) {
+        List<User> allUsers = userRepository.findAllByCompanyId(id);
+        return allUsers.stream().map(obj -> mapperUtil.convert(obj, new UserDto())).collect(Collectors.toList());
+    }
+
+    @Override
     public List<UserDto> findAllUsers() {
         List<User> allUsers = userRepository.findAll();
         return allUsers.stream().map(obj -> mapperUtil.convert(obj, new UserDto())).collect(Collectors.toList());

@@ -8,6 +8,7 @@ import com.project.service.CompanyService;
 import com.project.service.RoleService;
 import com.project.service.UserService;
 import org.dom4j.rule.Mode;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class UserController {
     private RoleService roleService;
     private CompanyService companyService;
 
+
     public UserController(UserService userService, RoleService roleService, CompanyService companyService) {
         this.userService = userService;
         this.roleService = roleService;
@@ -32,16 +34,16 @@ public class UserController {
     }
 
     @GetMapping("/registration")
-    public String registration(Model model){
-        model.addAttribute("users", userService.findAllUsers());
+    public String registration(Model model, Authentication authentication) throws AccountingProjectException {
+        model.addAttribute("users", userService.listAllUsersByCompanyId(userService.findByEmail(authentication.getName()).getCompany().getId()));
         return "/user/registration";
     }
 
     @GetMapping("/addUser")
-    public String addUser(UserDto userDto, Model model){
+    public String addUser(UserDto userDto, Model model, Authentication authentication){
         model.addAttribute("user", new UserDto());
         model.addAttribute("roles", roleService.findAllRoles());
-        model.addAttribute("companies", companyService.listAllCompanies());
+        model.addAttribute("companyDto", companyService.findCompanyByUser(authentication.getName()));
         return "/user/addUser";
     }
 
@@ -52,10 +54,10 @@ public class UserController {
     }
 
     @GetMapping("/update/{id}")
-    public String editUser(@PathVariable("id") long id, Model model) throws AccountingProjectException {
+    public String editUser(@PathVariable("id") long id, Model model, Authentication authentication) throws AccountingProjectException {
         model.addAttribute("user", userService.findById(id));
         model.addAttribute("roles", roleService.findAllRoles());
-        model.addAttribute("companies", companyService.listAllCompanies());
+        model.addAttribute("companyDto", companyService.findCompanyByUser(authentication.getName()));
         return "/user/update";
     }
 

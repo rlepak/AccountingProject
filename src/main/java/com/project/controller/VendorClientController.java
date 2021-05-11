@@ -5,8 +5,10 @@ import com.project.dto.UserDto;
 import com.project.dto.VendorClientDto;
 import com.project.exception.AccountingProjectException;
 import com.project.service.StateService;
+import com.project.service.UserService;
 import com.project.service.VendorClientService;
 import org.dom4j.rule.Mode;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,15 +22,17 @@ public class VendorClientController {
 
     private StateService stateService;
     private VendorClientService vendorClientService;
+    private UserService userService;
 
-    public VendorClientController(StateService stateService, VendorClientService vendorClientService) {
+    public VendorClientController(StateService stateService, VendorClientService vendorClientService, UserService userService) {
         this.stateService = stateService;
         this.vendorClientService = vendorClientService;
+        this.userService = userService;
     }
 
     @GetMapping("/registration")
-    public String registration(Model model){
-        model.addAttribute("vendorsClients", vendorClientService.listAllVendorClient());
+    public String registration(Model model, Authentication authentication) throws AccountingProjectException {
+        model.addAttribute("vendorsClients", vendorClientService.listAllVendorClientByCompanyId(userService.findByEmail(authentication.getName()).getCompany().getId()));
         return "/vendor_client/registration";
     }
 
@@ -39,9 +43,9 @@ public class VendorClientController {
     }
 
     @PostMapping("/addVendor_client")
-    public String createVendorClient(VendorClientDto vendorClientDto, Model model) throws AccountingProjectException {
+    public String createVendorClient(VendorClientDto vendorClientDto, Model model, Authentication authentication) throws AccountingProjectException {
         model.addAttribute("vendorClientDto", new VendorClientDto());
-        vendorClientService.save(vendorClientDto);
+        vendorClientService.save(vendorClientDto, authentication);
         return "redirect:/vendor_client/registration";
     }
 

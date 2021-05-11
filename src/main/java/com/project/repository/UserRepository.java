@@ -1,5 +1,6 @@
 package com.project.repository;
 
+import com.project.entity.Category;
 import com.project.entity.Company;
 import com.project.entity.Role;
 import com.project.entity.User;
@@ -18,8 +19,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
                 "where c.title = ?1 and u.role_id = 1", nativeQuery = true)
         List<User> listOfAllUsersWithRoleAdmin(String companyName);
 
-
         User findByEmail(String email);
+
+        List<User> findAllByCompanyId(Long id);
+
 
 
 

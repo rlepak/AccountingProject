@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
+import org.springframework.security.core.Authentication;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,4 +38,5 @@ public class User extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
+
 }

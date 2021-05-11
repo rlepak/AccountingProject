@@ -9,11 +9,15 @@ import com.project.entity.User;
 import com.project.enums.InvoiceType;
 import com.project.enums.Status;
 import com.project.exception.AccountingProjectException;
+import com.project.repository.CompanyRepository;
 import com.project.repository.InvoiceProductRepository;
 import com.project.repository.InvoiceRepository;
+import com.project.repository.UserRepository;
 import com.project.service.InvoiceService;
+import com.project.service.UserService;
 import com.project.util.MapperUtil;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,11 +29,17 @@ public class InvoiceServiceImpl implements InvoiceService {
     private MapperUtil mapperUtil;
     private InvoiceRepository invoiceRepository;
     private InvoiceProductRepository invoiceProductRepository;
+    private UserService userService;
+    private UserRepository userRepository;
+    private CompanyRepository companyRepository;
 
-    public InvoiceServiceImpl(MapperUtil mapperUtil, InvoiceRepository invoiceRepository, InvoiceProductRepository invoiceProductRepository) {
+    public InvoiceServiceImpl(MapperUtil mapperUtil, InvoiceRepository invoiceRepository, InvoiceProductRepository invoiceProductRepository, UserService userService, UserRepository userRepository, CompanyRepository companyRepository) {
         this.mapperUtil = mapperUtil;
         this.invoiceRepository = invoiceRepository;
         this.invoiceProductRepository = invoiceProductRepository;
+        this.userService = userService;
+        this.userRepository = userRepository;
+        this.companyRepository = companyRepository;
     }
 
     @Override
@@ -60,7 +70,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public InvoiceDto savePurchaseInvoice(InvoiceDto invoiceDto) throws AccountingProjectException {
+    public InvoiceDto savePurchaseInvoice(InvoiceDto invoiceDto, Authentication authentication) throws AccountingProjectException {
+
         Invoice invoice = invoiceRepository.findById(invoiceDto.getId()).orElse(null);
         if (invoice != null) {
             throw new AccountingProjectException("This invoice exist");
@@ -68,6 +79,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         Invoice invoiceObject = mapperUtil.convert(invoiceDto, new Invoice());
         invoiceObject.setInvoiceType(InvoiceType.PURCHASE);
         invoiceObject.setStatus(Status.ACTIVE);
+        invoiceObject.setCompany(companyRepository.findAllByUsers(userRepository.findByEmail(authentication.getName())));
         Invoice savedInvoice = invoiceRepository.save(invoiceObject);
         return mapperUtil.convert(savedInvoice, new InvoiceDto());
     }

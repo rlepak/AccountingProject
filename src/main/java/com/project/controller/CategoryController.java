@@ -5,6 +5,8 @@ import com.project.dto.ProductDto;
 import com.project.dto.UserDto;
 import com.project.exception.AccountingProjectException;
 import com.project.service.CategoryService;
+import com.project.service.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CategoryController {
 
     private CategoryService categoryService;
+    private UserService userService;
 
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryService categoryService, UserService userService) {
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @GetMapping()
-    public String allCategories(Model model){
-        model.addAttribute("categories", categoryService.listAllCategories());
+    public String allCategories(Model model, Authentication authentication) throws AccountingProjectException {
+        model.addAttribute("categories", categoryService.listAllCategoriesByCompanyId(userService.findByEmail(authentication.getName()).getCompany().getId()));
         return "/category/categories";
     }
 
@@ -34,9 +38,9 @@ public class CategoryController {
     }
 
     @PostMapping("/addCategory")
-    public String createCategory(CategoryDto categoryDto, Model model) throws AccountingProjectException {
+    public String createCategory(CategoryDto categoryDto, Model model, Authentication authentication) throws AccountingProjectException {
         model.addAttribute("categoryDto", new CategoryDto());
-        categoryService.save(categoryDto);
+        categoryService.save(categoryDto, authentication);
         return "redirect:/category";
     }
 
